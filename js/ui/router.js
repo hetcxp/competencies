@@ -199,8 +199,8 @@ export class CourseRouter {
   constructor({ store, adapter = null, rootContainer = '#app', lang = null }) {
     this.store = store;
     this.adapter = adapter;
-    this.container = typeof rootContainer === 'string' && typeof document !== 'undefined'
-      ? document.querySelector(rootContainer)
+    this.container = typeof rootContainer === 'string'
+      ? (typeof document !== 'undefined' ? document.querySelector(rootContainer) : null)
       : rootContainer;
 
     let initialLang = lang || 'es';
@@ -227,8 +227,10 @@ export class CourseRouter {
       }
     }
 
-    if (typeof document !== 'undefined') {
-      document.documentElement.lang = this.currentLanguage;
+    if (this.container && typeof this.container === 'object') {
+      if (typeof document !== 'undefined') {
+        document.documentElement.lang = this.currentLanguage;
+      }
       this.init();
     }
   }
@@ -277,14 +279,16 @@ export class CourseRouter {
    * Inicializa la interfaz SPA y monta la vista actual
    */
   init() {
-    if (typeof document === 'undefined' || !this.container) return;
+    if (!this.container || typeof this.container !== 'object') return;
 
-    // Inicializa el drawer de espinas teóricas opcionales
-    this.theoryDrawer = new TheoryDrawer({
-      store: this.store,
-      container: document.body,
-      lang: this.currentLanguage
-    });
+    // Inicializa el drawer de espinas teóricas opcionales si hay DOM
+    if (typeof document !== 'undefined') {
+      this.theoryDrawer = new TheoryDrawer({
+        store: this.store,
+        container: document.body,
+        lang: this.currentLanguage
+      });
+    }
 
     // Suscripción al Store para reactividad
     if (this.store) {
@@ -466,7 +470,7 @@ export class CourseRouter {
    * Renderiza el shell principal y la página del módulo actual
    */
   render() {
-    if (typeof document === 'undefined' || !this.container) return;
+    if (!this.container || typeof this.container !== 'object') return;
 
     const t = UI_TRANSLATIONS[this.currentLanguage] || UI_TRANSLATIONS.es;
     const isEn = this.currentLanguage === 'en';
@@ -513,7 +517,7 @@ export class CourseRouter {
                 <span class="rise-progress-label">${escapeHtml(t.progressLabel)}</span>
                 <span class="rise-progress-value" id="top-progress-text">${progressPercent}%</span>
               </div>
-              <div class="rise-progress-track">
+              <div class="rise-progress-track" role="progressbar" aria-label="${escapeHtml(t.progressLabel)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progressPercent}">
                 <div class="rise-progress-fill" id="top-progress-bar" style="width: ${progressPercent}%;"></div>
               </div>
             </div>
@@ -560,8 +564,8 @@ export class CourseRouter {
             </div>
           </nav>
 
-          <!-- Área Principal de Contenido del Módulo -->
-          <main class="rise-main-content" id="module-viewport" role="main">
+          <!-- Área Principal de Contenido del Módulo (Landmark Semántico Canónico Único) -->
+          <main class="rise-main-content" id="module-viewport">
             <article class="rise-module-card">
               <!-- Cabecera del Módulo -->
               <header class="rise-module-header">
@@ -630,10 +634,10 @@ export class CourseRouter {
           class="rise-floating-theory-btn"
           id="btn-floating-theory"
           aria-label="${escapeHtml(t.floatingTheoryAria)}"
+          title="${escapeHtml(t.floatingTheoryBtn)}"
           data-theory-id="${mod.theoryId || `mod-${this.currentModuleIndex}-theory`}"
         >
           <span class="rise-floating-theory-icon" aria-hidden="true">📖</span>
-          <span class="rise-floating-theory-text">${escapeHtml(t.floatingTheoryBtn)}</span>
         </button>
       </div>
     `;
@@ -646,6 +650,8 @@ export class CourseRouter {
    * Vincula los escuchadores de eventos de la barra lateral y navegación general
    */
   _bindShellEvents() {
+    if (typeof document === 'undefined' || !this.container || typeof this.container.querySelectorAll !== 'function') return;
+
     const t = UI_TRANSLATIONS[this.currentLanguage] || UI_TRANSLATIONS.es;
 
     // Clics en la barra lateral
@@ -736,6 +742,7 @@ export class CourseRouter {
    * @param {Object} mod 
    */
   _mountModuleInteractiveBlocks(mod) {
+    if (typeof document === 'undefined' || !this.container || typeof this.container.querySelector !== 'function') return;
     const area = this.container.querySelector('#interactive-area');
     if (!area) return;
 
@@ -1512,8 +1519,10 @@ export class CourseRouter {
     const progressPercent = Math.round(((state.completedModules.length) / totalModules) * 100);
     const textEl = document.querySelector('#top-progress-text');
     const barEl = document.querySelector('#top-progress-bar');
+    const trackEl = barEl ? barEl.parentElement : null;
     if (textEl) textEl.textContent = `${progressPercent}%`;
     if (barEl) barEl.style.width = `${progressPercent}%`;
+    if (trackEl) trackEl.setAttribute('aria-valuenow', String(progressPercent));
   }
 
   /**

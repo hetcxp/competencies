@@ -84,26 +84,34 @@ export class ScormAdapter {
       // 1. Intentar SCORM 1.2
       const api12 = this._findApi(this.windowObj, 'API');
       if (api12 && typeof api12.LMSInitialize === 'function') {
-        const res = api12.LMSInitialize('');
-        if (res === 'true' || res === true || res === 1) {
-          this.api = api12;
-          this.version = '1.2';
-          this.initialized = true;
-          this.setValue('cmi.core.exit', 'suspend');
-          return true;
+        try {
+          const res = api12.LMSInitialize('');
+          if (res === 'true' || res === true || res === 1) {
+            this.api = api12;
+            this.version = '1.2';
+            this.initialized = true;
+            this.setValue('cmi.core.exit', 'suspend');
+            return true;
+          }
+        } catch (e) {
+          console.warn('[ScormAdapter] LMSInitialize exception, falling back:', e);
         }
       }
 
       // 2. Intentar SCORM 2004
       const api2004 = this._findApi(this.windowObj, 'API_1484_11');
       if (api2004 && typeof api2004.Initialize === 'function') {
-        const res = api2004.Initialize('');
-        if (res === 'true' || res === true || res === 1) {
-          this.api = api2004;
-          this.version = '2004';
-          this.initialized = true;
-          this.setValue('cmi.exit', 'suspend');
-          return true;
+        try {
+          const res = api2004.Initialize('');
+          if (res === 'true' || res === true || res === 1) {
+            this.api = api2004;
+            this.version = '2004';
+            this.initialized = true;
+            this.setValue('cmi.exit', 'suspend');
+            return true;
+          }
+        } catch (e) {
+          console.warn('[ScormAdapter] Initialize exception, falling back:', e);
         }
       }
     }
@@ -114,6 +122,22 @@ export class ScormAdapter {
     this._loadFallbackStore();
     this.setValue('cmi.core.exit', 'suspend');
     return true;
+  }
+
+  /**
+   * Degrada transparentemente a modo fallback ante excepciones en tiempo de ejecución del LMS
+   * Preserva el snapshot más reciente en memoria antes de fusionar con el storage local
+   * @private
+   */
+  _degradeToFallback() {
+    this.version = 'fallback';
+    this.api = null;
+    const currentMemory = new Map(this.memoryStore);
+    this._loadFallbackStore();
+    for (const [k, v] of currentMemory.entries()) {
+      this.memoryStore.set(k, v);
+    }
+    this._persistFallbackStore();
   }
 
   _loadFallbackStore() {
@@ -215,11 +239,23 @@ export class ScormAdapter {
     const mapped = this._mapElement(element);
 
     if (this.version === '1.2' && this.api) {
-      return String(this.api.LMSGetValue(mapped) || '');
+      try {
+        return String(this.api.LMSGetValue(mapped) || '');
+      } catch (err) {
+        console.warn('[ScormAdapter] LMSGetValue exception:', err);
+        this._degradeToFallback();
+        return this.memoryStore.get(mapped) || '';
+      }
     }
 
     if (this.version === '2004' && this.api) {
-      return String(this.api.GetValue(mapped) || '');
+      try {
+        return String(this.api.GetValue(mapped) || '');
+      } catch (err) {
+        console.warn('[ScormAdapter] GetValue exception:', err);
+        this._degradeToFallback();
+        return this.memoryStore.get(mapped) || '';
+      }
     }
 
     return this.memoryStore.get(mapped) || '';
@@ -239,17 +275,54 @@ export class ScormAdapter {
     const strVal = String(value);
     const mapped = this._mapElement(element);
 
+    // Validación SPM SCORM (4096 caracteres para SCORM 1.2/Fallback, 64000 para SCORM 2004)
+    if (mapped === 'cmi.suspend_data') {
+      const maxLimit = this.version === '2004' ? 64000 : 4096;
+      if (strVal.length > maxLimit) {
+        console.warn(`[ScormAdapter] suspend_data exceeds SPM limit (${strVal.length} > ${maxLimit}). Value rejected.`);
+        return false;
+      }
+    }
+
+    // Mantiene espejo local en memoria para degradación y consistencia
+    this.memoryStore.set(mapped, strVal);
+
     if (this.version === '1.2' && this.api) {
-      const res = this.api.LMSSetValue(mapped, strVal);
-      return res === 'true' || res === true || res === 1;
+      try {
+        const res = this.api.LMSSetValue(mapped, strVal);
+        if (res === 'true' || res === true || res === 1) {
+          return true;
+        }
+        console.warn(`[ScormAdapter] LMSSetValue returned unsuccessful code "${res}", degrading to fallback`);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        return false;
+      } catch (err) {
+        console.warn('[ScormAdapter] LMSSetValue exception:', err);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        return false;
+      }
     }
 
     if (this.version === '2004' && this.api) {
-      const res = this.api.SetValue(mapped, strVal);
-      return res === 'true' || res === true || res === 1;
+      try {
+        const res = this.api.SetValue(mapped, strVal);
+        if (res === 'true' || res === true || res === 1) {
+          return true;
+        }
+        console.warn(`[ScormAdapter] SetValue returned unsuccessful code "${res}", degrading to fallback`);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        return false;
+      } catch (err) {
+        console.warn('[ScormAdapter] SetValue exception:', err);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        return false;
+      }
     }
 
-    this.memoryStore.set(mapped, strVal);
     this._persistFallbackStore();
     return true;
   }
@@ -310,13 +383,39 @@ export class ScormAdapter {
     this.syncSessionTime();
 
     if (this.version === '1.2' && this.api) {
-      const res = this.api.LMSCommit('');
-      return res === 'true' || res === true || res === 1;
+      try {
+        const res = this.api.LMSCommit('');
+        if (res === 'true' || res === true || res === 1) {
+          return true;
+        }
+        console.warn(`[ScormAdapter] LMSCommit returned unsuccessful code "${res}", degrading to fallback`);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        return false;
+      } catch (err) {
+        console.warn('[ScormAdapter] LMSCommit exception:', err);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        return false;
+      }
     }
 
     if (this.version === '2004' && this.api) {
-      const res = this.api.Commit('');
-      return res === 'true' || res === true || res === 1;
+      try {
+        const res = this.api.Commit('');
+        if (res === 'true' || res === true || res === 1) {
+          return true;
+        }
+        console.warn(`[ScormAdapter] Commit returned unsuccessful code "${res}", degrading to fallback`);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        return false;
+      } catch (err) {
+        console.warn('[ScormAdapter] Commit exception:', err);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        return false;
+      }
     }
 
     this._persistFallbackStore();
@@ -334,19 +433,47 @@ export class ScormAdapter {
 
     this.setExit('suspend');
     this.syncSessionTime();
-    this.commit();
+    const commitSuccess = this.commit();
 
-    let success = true;
+    let apiSuccess = true;
     if (this.version === '1.2' && this.api) {
-      const res = this.api.LMSFinish('');
-      success = res === 'true' || res === true || res === 1;
+      try {
+        const res = this.api.LMSFinish('');
+        if (res === 'true' || res === true || res === 1) {
+          apiSuccess = true;
+        } else {
+          console.warn(`[ScormAdapter] LMSFinish returned unsuccessful code "${res}", degrading to fallback`);
+          this._degradeToFallback();
+          this._persistFallbackStore();
+          apiSuccess = false;
+        }
+      } catch (err) {
+        console.warn('[ScormAdapter] LMSFinish exception:', err);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        apiSuccess = false;
+      }
     } else if (this.version === '2004' && this.api) {
-      const res = this.api.Terminate('');
-      success = res === 'true' || res === true || res === 1;
+      try {
+        const res = this.api.Terminate('');
+        if (res === 'true' || res === true || res === 1) {
+          apiSuccess = true;
+        } else {
+          console.warn(`[ScormAdapter] Terminate returned unsuccessful code "${res}", degrading to fallback`);
+          this._degradeToFallback();
+          this._persistFallbackStore();
+          apiSuccess = false;
+        }
+      } catch (err) {
+        console.warn('[ScormAdapter] Terminate exception:', err);
+        this._degradeToFallback();
+        this._persistFallbackStore();
+        apiSuccess = false;
+      }
     }
 
     this.initialized = false;
-    return success;
+    return Boolean(commitSuccess && apiSuccess);
   }
 
   /**
@@ -509,9 +636,11 @@ export class ScormAdapter {
       }
 
       if (serialized.length <= 4096) {
-        this.setValue('cmi.suspend_data', serialized);
-        this.commit();
+        const setOk = this.setValue('cmi.suspend_data', serialized);
+        const commitOk = this.commit();
+        return setOk && commitOk;
       }
+      return false;
     }
 
     return true;

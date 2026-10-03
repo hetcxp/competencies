@@ -1238,7 +1238,7 @@
   margin: 0.75rem 0 1.25rem;
 }
 
-/* Tablas Teóricas (BARS, Moodle, Tríada Ontológica) */
+/* Tablas Teóricas (BARS, Taxonomías, Tríada Ontológica) */
 .theory-deep-dive table,
 .rise-drawer-content-serif table,
 .rise-drawer-content-serif .rise-table {
@@ -2195,30 +2195,28 @@
   z-index: 95;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
   background: linear-gradient(135deg, #0F766E 0%, #115E59 100%);
   color: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-full, 9999px);
-  padding: 0.8rem 1.35rem;
-  font-family: inherit;
-  font-size: 0.92rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  padding: 0;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(15, 118, 110, 0.35), 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .rise-floating-theory-btn:hover {
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-3px) scale(1.06);
   background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
   box-shadow: 0 12px 28px rgba(15, 118, 110, 0.45), 0 4px 10px rgba(0, 0, 0, 0.15);
   color: #FFFFFF;
 }
 
 .rise-floating-theory-btn:active {
-  transform: translateY(-1px) scale(0.99);
+  transform: translateY(-1px) scale(0.96);
   box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
 }
 
@@ -2228,21 +2226,28 @@
 }
 
 .rise-floating-theory-icon {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   line-height: 1;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.rise-floating-theory-text,
 .rise-floating-theory-label {
-  line-height: 1.2;
+  display: none;
 }
 
 @media (max-width: 640px) {
   .rise-floating-theory-btn {
     bottom: 1.25rem;
     right: 1.25rem;
-    padding: 0.7rem 1.1rem;
-    font-size: 0.85rem;
+    width: 2.85rem;
+    height: 2.85rem;
+  }
+
+  .rise-floating-theory-icon {
+    font-size: 1.2rem;
   }
 }
 

@@ -56,11 +56,31 @@ export class TheoryDrawer {
     this.activeData = null;
     this.previousActiveElement = null;
     this._handleKeyDown = this._handleKeyDown.bind(this);
+    this._handleOverlayClick = this._handleOverlayClick.bind(this);
+    this._handleCloseClick = this._handleCloseClick.bind(this);
+    this._globalListenersAttached = false;
+    this._domListenersAttached = false;
 
     if (typeof document !== 'undefined') {
       this._ensureElements();
       this._bindGlobalEvents();
     }
+  }
+
+  /**
+   * Manejador de clic sobre el overlay para cerrar el drawer
+   * @private
+   */
+  _handleOverlayClick() {
+    this.close();
+  }
+
+  /**
+   * Manejador de clic sobre el botón cerrar
+   * @private
+   */
+  _handleCloseClick() {
+    this.close();
   }
 
   /**
@@ -135,33 +155,105 @@ export class TheoryDrawer {
       this.drawerEl = drawer;
     }
 
-    // Vincula eventos de cierre propios del DOM
-    if (this.overlayEl) {
-      this.overlayEl.addEventListener('click', () => this.close());
-    }
+    // Vincula eventos de cierre propios del DOM de manera idempotente
+    if (!this._domListenersAttached) {
+      if (this.overlayEl) {
+        if (this.overlayEl._theoryDrawerHandler) {
+          this.overlayEl.removeEventListener('click', this.overlayEl._theoryDrawerHandler);
+        }
+        this.overlayEl._theoryDrawerHandler = this._handleOverlayClick;
+        this.overlayEl.addEventListener('click', this._handleOverlayClick);
+      }
 
-    const closeBtn = this.drawerEl ? this.drawerEl.querySelector('.rise-drawer-close') : null;
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => this.close());
+      const closeBtn = this.drawerEl ? this.drawerEl.querySelector('.rise-drawer-close') : null;
+      if (closeBtn) {
+        if (closeBtn._theoryDrawerHandler) {
+          closeBtn.removeEventListener('click', closeBtn._theoryDrawerHandler);
+        }
+        closeBtn._theoryDrawerHandler = this._handleCloseClick;
+        closeBtn.addEventListener('click', this._handleCloseClick);
+      }
+      this._domListenersAttached = true;
     }
   }
 
   /**
-   * Vincula el listener global de teclado (Escape)
+   * Vincula el listener global de teclado (Escape) de forma idempotente
    */
   _bindGlobalEvents() {
-    document.addEventListener('keydown', this._handleKeyDown);
+    if (!this._globalListenersAttached && typeof document !== 'undefined') {
+      document.addEventListener('keydown', this._handleKeyDown);
+      this._globalListenersAttached = true;
+    }
   }
 
   /**
-   * Manejador de teclado para accesibilidad (tecla ESC)
+   * Desvincula el listener global de teclado
+   */
+  _unbindGlobalEvents() {
+    if (this._globalListenersAttached && typeof document !== 'undefined') {
+      document.removeEventListener('keydown', this._handleKeyDown);
+      this._globalListenersAttached = false;
+    }
+  }
+
+  /**
+   * Manejador de teclado para accesibilidad (tecla ESC y Focus Trap en Tab)
    * @param {KeyboardEvent} e 
    */
   _handleKeyDown(e) {
-    if (e.key === 'Escape' && this.isOpen()) {
+    if (!this.isOpen()) return;
+
+    if (e.key === 'Escape') {
       e.preventDefault();
       this.close();
+      return;
     }
+
+    if (e.key === 'Tab' && this.drawerEl) {
+      const focusables = Array.from(this.drawerEl.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )).filter(el => !el.hasAttribute('disabled'));
+
+      if (focusables.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      const firstEl = focusables[0];
+      const lastEl = focusables[focusables.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstEl || !this.drawerEl.contains(document.activeElement)) {
+          e.preventDefault();
+          lastEl.focus();
+        }
+      } else {
+        if (document.activeElement === lastEl || !this.drawerEl.contains(document.activeElement)) {
+          e.preventDefault();
+          firstEl.focus();
+        }
+      }
+    }
+  }
+
+  /**
+   * Conmuta la interactividad del contenido subyacente para lectores de pantalla
+   * @private
+   * @param {boolean} isInert
+   */
+  _setUnderlyingInert(isInert) {
+    if (typeof document === 'undefined') return;
+    const targets = document.querySelectorAll('.rise-top-bar, .rise-body-layout');
+    targets.forEach(el => {
+      if (isInert) {
+        el.setAttribute('aria-hidden', 'true');
+        if ('inert' in el) el.inert = true;
+      } else {
+        el.removeAttribute('aria-hidden');
+        if ('inert' in el) el.inert = false;
+      }
+    });
   }
 
   /**
@@ -223,6 +315,7 @@ export class TheoryDrawer {
   open(contentId = null, data = null) {
     if (typeof document === 'undefined') return;
     this._ensureElements();
+    this._bindGlobalEvents();
 
     this.activeContentId = contentId;
     if (data) {
@@ -241,6 +334,9 @@ export class TheoryDrawer {
     if (this.drawerEl) {
       this.drawerEl.classList.add('is-open');
       this.drawerEl.setAttribute('aria-hidden', 'false');
+
+      // Aislar contenido de fondo mientras el modal está activo
+      this._setUnderlyingInert(true);
 
       // Foco accesible al botón de cerrar
       const closeBtn = this.drawerEl.querySelector('.rise-drawer-close');
@@ -282,6 +378,9 @@ export class TheoryDrawer {
       this.drawerEl.setAttribute('aria-hidden', 'true');
     }
 
+    // Restaurar interactividad del contenido de fondo
+    this._setUnderlyingInert(false);
+
     // Restauración de foco accesible
     if (this.previousActiveElement && typeof this.previousActiveElement.focus === 'function') {
       this.previousActiveElement.focus();
@@ -307,11 +406,23 @@ export class TheoryDrawer {
   }
 
   /**
-   * Desconecta listeners globales al destruir el componente
+   * Desconecta listeners globales y locales al destruir el componente
    */
   destroy() {
-    if (typeof document !== 'undefined') {
-      document.removeEventListener('keydown', this._handleKeyDown);
+    this._unbindGlobalEvents();
+    if (this.overlayEl && this._handleOverlayClick) {
+      this.overlayEl.removeEventListener('click', this._handleOverlayClick);
+      if (this.overlayEl._theoryDrawerHandler === this._handleOverlayClick) {
+        delete this.overlayEl._theoryDrawerHandler;
+      }
     }
+    const closeBtn = this.drawerEl ? this.drawerEl.querySelector('.rise-drawer-close') : null;
+    if (closeBtn && this._handleCloseClick) {
+      closeBtn.removeEventListener('click', this._handleCloseClick);
+      if (closeBtn._theoryDrawerHandler === this._handleCloseClick) {
+        delete closeBtn._theoryDrawerHandler;
+      }
+    }
+    this._domListenersAttached = false;
   }
 }

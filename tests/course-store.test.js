@@ -326,3 +326,44 @@ test('CourseStore - Status completed previo no se promueve a passed ni regala fi
   assert.equal(store.getState().courseStatus, 'completed', 'courseStatus debe ser completed');
   assert.equal(store.getState().finalScore, 0, 'finalScore no debe ser 100 sin rubric passed');
 });
+
+test('CourseStore - Sanitiza estrictamente completedModules rechazando strings, floats, negativos y > 5', () => {
+  const store = createCourseStore(null, {
+    completedModules: ['1', 2.5, -3, 99, 2, 'abc', null, 4]
+  });
+
+  // Solo los enteros en rango [0..5] deben ser aceptados
+  assert.deepEqual(store.getState().completedModules, [2, 4], 'Solo debe preservar enteros [0..5]');
+
+  // Rechazo en dispatchAction COMPLETE_MODULE
+  store.dispatchAction('COMPLETE_MODULE', '3'); // string rechazado
+  assert.deepEqual(store.getState().completedModules, [2, 4]);
+
+  store.dispatchAction('COMPLETE_MODULE', 3.8); // float rechazado
+  assert.deepEqual(store.getState().completedModules, [2, 4]);
+
+  store.dispatchAction('COMPLETE_MODULE', -1); // negativo rechazado
+  assert.deepEqual(store.getState().completedModules, [2, 4]);
+
+  store.dispatchAction('COMPLETE_MODULE', 6); // fuera de rango rechazado
+  assert.deepEqual(store.getState().completedModules, [2, 4]);
+
+  store.dispatchAction('COMPLETE_MODULE', 3); // entero válido aceptado
+  assert.deepEqual(store.getState().completedModules, [2, 3, 4]);
+});
+
+test('CourseStore - Clampea finalScore y normaliza courseStatus en initialState del constructor', () => {
+  const store1 = createCourseStore(null, {
+    finalScore: 999,
+    courseStatus: 'invalid_status_xyz'
+  });
+  assert.equal(store1.getState().finalScore, 100, 'finalScore > 100 debe clampearse a 100');
+  assert.equal(store1.getState().courseStatus, 'incomplete', 'status inválido debe normalizarse a incomplete');
+
+  const store2 = createCourseStore(null, {
+    finalScore: -50,
+    courseStatus: 'completed'
+  });
+  assert.equal(store2.getState().finalScore, 0, 'finalScore negativo debe clampearse a 0');
+  assert.equal(store2.getState().courseStatus, 'completed', 'status completed debe ser aceptado');
+});

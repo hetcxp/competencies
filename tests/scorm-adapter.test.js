@@ -295,3 +295,195 @@ test('ScormAdapter - Distingue estrictamente completed de passed en SCORM 1.2 y 
   adapter2004.setStatus('passed');
   assert.equal(adapter2004.getStatus(), 'passed', 'SCORM 2004 debe retornar passed únicamente cuando success_status es passed');
 });
+
+test('ScormAdapter - Resiliencia y degradación a fallback ante excepciones en LMS API (gateway seguro)', () => {
+  // 1. Excepción en LMSInitialize (SCORM 1.2)
+  const faultyInitApi12 = {
+    LMSInitialize() { throw new Error('SecurityError: Blocked frame from accessing cross-origin'); }
+  };
+  const adapterInit12 = new ScormAdapter({ windowObj: { API: faultyInitApi12 } });
+  assert.doesNotThrow(() => adapterInit12.init());
+  assert.equal(adapterInit12.version, 'fallback');
+
+  // 2. Excepción en Initialize (SCORM 2004)
+  const faultyInitApi2004 = {
+    Initialize() { throw new Error('LMS disconnected'); }
+  };
+  const adapterInit2004 = new ScormAdapter({ windowObj: { API_1484_11: faultyInitApi2004 } });
+  assert.doesNotThrow(() => adapterInit2004.init());
+  assert.equal(adapterInit2004.version, 'fallback');
+
+  // 3. Excepción en LMSGetValue
+  const faultyGetApi = {
+    LMSInitialize: () => 'true',
+    LMSGetValue: () => { throw new Error('API failure on get'); },
+    LMSSetValue: () => 'true',
+    LMSCommit: () => 'true',
+    LMSFinish: () => 'true'
+  };
+  const adapterGet = new ScormAdapter({ windowObj: { API: faultyGetApi } });
+  adapterGet.init();
+  assert.equal(adapterGet.version, '1.2');
+  let val;
+  assert.doesNotThrow(() => { val = adapterGet.getValue('cmi.core.lesson_location'); });
+  assert.equal(val, '');
+  assert.equal(adapterGet.version, 'fallback');
+
+  // 4. Excepción en LMSSetValue
+  let setCallCount = 0;
+  const faultySetApi = {
+    LMSInitialize: () => 'true',
+    LMSGetValue: () => '',
+    LMSSetValue: () => {
+      setCallCount++;
+      if (setCallCount > 1) {
+        throw new Error('API failure on set');
+      }
+      return 'true';
+    },
+    LMSCommit: () => 'true',
+    LMSFinish: () => 'true'
+  };
+  const adapterSet = new ScormAdapter({ windowObj: { API: faultySetApi } });
+  adapterSet.init();
+  assert.equal(adapterSet.version, '1.2');
+  let setResult;
+  assert.doesNotThrow(() => { setResult = adapterSet.setValue('cmi.core.lesson_location', 'mod-1'); });
+  assert.equal(setResult, false);
+  assert.equal(adapterSet.version, 'fallback');
+
+  // 5. Excepción en LMSCommit
+  const faultyCommitApi = {
+    LMSInitialize: () => 'true',
+    LMSGetValue: () => '',
+    LMSSetValue: () => 'true',
+    LMSCommit: () => { throw new Error('Commit failed'); },
+    LMSFinish: () => 'true'
+  };
+  const adapterCommit = new ScormAdapter({ windowObj: { API: faultyCommitApi } });
+  adapterCommit.init();
+  let commitRes;
+  assert.doesNotThrow(() => { commitRes = adapterCommit.commit(); });
+  assert.equal(commitRes, false);
+  assert.equal(adapterCommit.version, 'fallback');
+
+  // 6. Excepción en LMSFinish
+  const faultyFinishApi = {
+    LMSInitialize: () => 'true',
+    LMSGetValue: () => '',
+    LMSSetValue: () => 'true',
+    LMSCommit: () => 'true',
+    LMSFinish: () => { throw new Error('Finish failed'); }
+  };
+  const adapterFinish = new ScormAdapter({ windowObj: { API: faultyFinishApi } });
+  adapterFinish.init();
+  let finishRes;
+  assert.doesNotThrow(() => { finishRes = adapterFinish.finish(); });
+  assert.equal(finishRes, false);
+  assert.equal(adapterFinish.version, 'fallback');
+});
+
+test('ScormAdapter - Validación estricta de SPM para suspend_data en SCORM 1.2, 2004 y Fallback', () => {
+  // SCORM 1.2
+  const mockApi12 = {
+    LMSInitialize: () => 'true',
+    LMSGetValue: () => '',
+    LMSSetValue: (k, v) => 'true',
+    LMSCommit: () => 'true',
+    LMSFinish: () => 'true'
+  };
+  const adapter12 = new ScormAdapter({ windowObj: { API: mockApi12 } });
+  adapter12.init();
+  assert.equal(adapter12.version, '1.2');
+
+  const valid12 = 'A'.repeat(4096);
+  assert.equal(adapter12.setValue('cmi.suspend_data', valid12), true, 'SCORM 1.2 debe aceptar <= 4096 caracteres');
+
+  const invalid12 = 'A'.repeat(4097);
+  assert.equal(adapter12.setValue('cmi.suspend_data', invalid12), false, 'SCORM 1.2 debe rechazar > 4096 caracteres');
+
+  // Fallback
+  const adapterFallback = new ScormAdapter({ windowObj: null, storage: null });
+  adapterFallback.init();
+  assert.equal(adapterFallback.version, 'fallback');
+  assert.equal(adapterFallback.setValue('cmi.suspend_data', valid12), true, 'Fallback debe aceptar <= 4096 caracteres');
+  assert.equal(adapterFallback.setValue('cmi.suspend_data', invalid12), false, 'Fallback debe rechazar > 4096 caracteres');
+
+  // SCORM 2004
+  const mockApi2004 = {
+    Initialize: () => 'true',
+    GetValue: () => '',
+    SetValue: (k, v) => 'true',
+    Commit: () => 'true',
+    Terminate: () => 'true'
+  };
+  const adapter2004 = new ScormAdapter({ windowObj: { API_1484_11: mockApi2004 } });
+  adapter2004.init();
+  assert.equal(adapter2004.version, '2004');
+
+  const valid2004 = 'B'.repeat(5000);
+  assert.equal(adapter2004.setValue('cmi.suspend_data', valid2004), true, 'SCORM 2004 debe aceptar 5000 caracteres');
+
+  const invalid2004 = 'B'.repeat(64001);
+  assert.equal(adapter2004.setValue('cmi.suspend_data', invalid2004), false, 'SCORM 2004 debe rechazar > 64000 caracteres');
+});
+
+test('ScormAdapter - Degradación a fallback y preservación local ante retornos "false" del LMS', () => {
+  // 1. SCORM 1.2: LMSSetValue retorna "false"
+  let setCalls = 0;
+  const rejectApi12 = {
+    LMSInitialize: () => 'true',
+    LMSGetValue: () => '',
+    LMSSetValue: () => {
+      setCalls++;
+      if (setCalls > 1) return 'false';
+      return 'true';
+    },
+    LMSCommit: () => 'true',
+    LMSFinish: () => 'true'
+  };
+  const mockStorageMap = {};
+  const mockStorage = {
+    getItem: (k) => mockStorageMap[k] || null,
+    setItem: (k, v) => { mockStorageMap[k] = String(v); }
+  };
+  const adapter12 = new ScormAdapter({ windowObj: { API: rejectApi12 }, storage: mockStorage });
+  adapter12.init();
+  assert.equal(adapter12.version, '1.2');
+
+  const res12 = adapter12.setValue('cmi.core.lesson_location', 'mod-3');
+  assert.equal(res12, false, 'Debe retornar false ante rechazo del LMS');
+  assert.equal(adapter12.version, 'fallback', 'Debe degradar a fallback');
+  assert.equal(adapter12.getValue('cmi.core.lesson_location'), 'mod-3', 'Debe conservar el valor en memoria tras degradación');
+  assert.ok(mockStorageMap['SCORM_COURSE_ALLES_LOCAL_DATA'], 'Debe haber persistido en fallback storage');
+
+  // 2. SCORM 2004: Commit retorna "false"
+  const rejectCommitApi2004 = {
+    Initialize: () => 'true',
+    GetValue: () => '',
+    SetValue: () => 'true',
+    Commit: () => 'false',
+    Terminate: () => 'true'
+  };
+  const adapter2004 = new ScormAdapter({ windowObj: { API_1484_11: rejectCommitApi2004 } });
+  adapter2004.init();
+  assert.equal(adapter2004.version, '2004');
+  const commitRes = adapter2004.commit();
+  assert.equal(commitRes, false, 'Commit debe retornar false ante rechazo del LMS');
+  assert.equal(adapter2004.version, 'fallback', 'Debe degradar a fallback tras fallo en Commit');
+
+  // 3. SCORM 2004: Terminate retorna "false"
+  const rejectTermApi2004 = {
+    Initialize: () => 'true',
+    GetValue: () => '',
+    SetValue: () => 'true',
+    Commit: () => 'true',
+    Terminate: () => 'false'
+  };
+  const adapterTerm2004 = new ScormAdapter({ windowObj: { API_1484_11: rejectTermApi2004 } });
+  adapterTerm2004.init();
+  assert.equal(adapterTerm2004.version, '2004');
+  const termRes = adapterTerm2004.finish();
+  assert.equal(termRes, false, 'Finish debe retornar false ante rechazo de Terminate en el LMS');
+  assert.equal(adapterTerm2004.version, 'fallback', 'Debe degradar a fallback tras fallo en Terminate');
+});

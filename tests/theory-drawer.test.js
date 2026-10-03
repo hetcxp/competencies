@@ -57,3 +57,55 @@ test('TheoryDrawer - Ejecución resiliente ante ausencia de DOM (Node runtime)',
     drawer.destroy();
   });
 });
+
+test('TheoryDrawer - Ciclo de vida de listeners: handlers vinculados, desvinculación en destroy() y re-vinculación en open()', () => {
+  const listenersMap = new Map();
+  const mockDocument = {
+    addEventListener(event, fn) {
+      if (!listenersMap.has(event)) listenersMap.set(event, new Set());
+      listenersMap.get(event).add(fn);
+    },
+    removeEventListener(event, fn) {
+      if (listenersMap.has(event)) listenersMap.get(event).delete(fn);
+    },
+    querySelector: () => null,
+    querySelectorAll: () => [],
+    createElement: () => ({
+      querySelector: () => null,
+      querySelectorAll: () => [],
+      classList: { add() {}, remove() {}, contains() { return false; } },
+      setAttribute() {},
+      removeAttribute() {},
+      appendChild() {},
+      addEventListener() {},
+      removeEventListener() {}
+    })
+  };
+
+  const originalDoc = global.document;
+  try {
+    global.document = mockDocument;
+
+    const drawer = new TheoryDrawer({ container: null });
+    assert.equal(typeof drawer._handleOverlayClick, 'function');
+    assert.equal(typeof drawer._handleCloseClick, 'function');
+    assert.equal(typeof drawer._handleKeyDown, 'function');
+
+    // Inicialmente los global listeners están vinculados
+    assert.equal(listenersMap.get('keydown')?.size, 1);
+
+    // destroy() debe desvincular keydown
+    drawer.destroy();
+    assert.equal(listenersMap.get('keydown')?.size, 0);
+
+    // open() debe re-vincular keydown
+    drawer.open('theory-test', { title: 'Test' });
+    assert.equal(listenersMap.get('keydown')?.size, 1);
+
+    // destroy() final
+    drawer.destroy();
+    assert.equal(listenersMap.get('keydown')?.size, 0);
+  } finally {
+    global.document = originalDoc;
+  }
+});

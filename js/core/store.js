@@ -20,6 +20,26 @@ function deepClone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
+export function sanitizeCompletedModules(modules) {
+  if (!Array.isArray(modules)) return [];
+  return [...new Set(
+    modules.filter(val => typeof val === 'number' && Number.isInteger(val) && val >= 0 && val <= 5)
+  )].sort((a, b) => a - b);
+}
+
+export function sanitizeCourseStatus(status) {
+  return ['passed', 'failed', 'completed', 'incomplete'].includes(status)
+    ? status
+    : 'incomplete';
+}
+
+export function sanitizeScore(score) {
+  if (typeof score !== 'number' || isNaN(score) || !isFinite(score)) {
+    return 0;
+  }
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
 export class CourseStore {
   /**
    * @param {Object} [scormAdapter] - Instancia de ScormAdapter
@@ -43,12 +63,12 @@ export class CourseStore {
         ...(DEFAULT_INITIAL_STATE.capstoneRubric),
         ...(initialState.capstoneRubric || {})
       },
-      completedModules: Array.isArray(initialState.completedModules)
-        ? [...initialState.completedModules]
-        : [],
+      completedModules: sanitizeCompletedModules(initialState.completedModules),
       theoryDrawersViewed: Array.isArray(initialState.theoryDrawersViewed)
-        ? [...initialState.theoryDrawersViewed]
-        : []
+        ? [...new Set(initialState.theoryDrawersViewed.filter(b => typeof b === 'string').map(b => b.slice(0, 50)))]
+        : [],
+      courseStatus: sanitizeCourseStatus(initialState.courseStatus),
+      finalScore: sanitizeScore(initialState.finalScore)
     };
 
     if (this.adapter) {
@@ -78,6 +98,16 @@ export class CourseStore {
         const parsed = JSON.parse(suspendRaw);
         if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
           if (parsed.courseStoreState && typeof parsed.courseStoreState === 'object') {
+            const rawCompleted = parsed.courseStoreState.completedModules;
+            const cleanCompleted = sanitizeCompletedModules(rawCompleted);
+
+            const rawBadges = parsed.courseStoreState.theoryDrawersViewed;
+            const cleanBadges = Array.isArray(rawBadges)
+              ? [...new Set(rawBadges
+                  .filter(b => typeof b === 'string')
+                  .map(b => b.slice(0, 50)))]
+              : this.state.theoryDrawersViewed;
+
             this.state = {
               ...this.state,
               ...parsed.courseStoreState,
@@ -93,12 +123,14 @@ export class CourseStore {
                 ...this.state.capstoneRubric,
                 ...(parsed.courseStoreState.capstoneRubric || {})
               },
-              completedModules: parsed.courseStoreState.completedModules || this.state.completedModules,
-              theoryDrawersViewed: parsed.courseStoreState.theoryDrawersViewed || this.state.theoryDrawersViewed
+              completedModules: cleanCompleted,
+              theoryDrawersViewed: cleanBadges
             };
           } else if (Array.isArray(parsed.theoryExplored)) {
             // Si solo hay badges registrados por el adapter
-            this.state.theoryDrawersViewed = parsed.theoryExplored.map(item => item.badgeId);
+            this.state.theoryDrawersViewed = parsed.theoryExplored
+              .filter(item => item && typeof item.badgeId === 'string')
+              .map(item => item.badgeId.slice(0, 50));
           }
         }
       } catch (e) {
@@ -113,7 +145,16 @@ export class CourseStore {
       this.state.finalScore = 100;
     } else if (status === 'completed') {
       this.state.courseStatus = 'completed';
+    } else if (status === 'failed') {
+      this.state.courseStatus = 'failed';
+    } else {
+      this.state.courseStatus = 'incomplete';
     }
+
+    // Sanitización canónica
+    this.state.finalScore = sanitizeScore(this.state.finalScore);
+    this.state.courseStatus = sanitizeCourseStatus(this.state.courseStatus);
+    this.state.completedModules = sanitizeCompletedModules(this.state.completedModules);
 
     // 4. Clamping canónico final de currentModule [0..5] y sincronización inmediata con LMS
     const cleanCurrentModule = Math.max(0, Math.min(5, Number.isInteger(this.state.currentModule) ? this.state.currentModule : 0));
@@ -167,13 +208,9 @@ export class CourseStore {
 
     // 0. Clamping estricto de tipos y rangos de las variables troncales
     const cleanCurrentModule = Math.max(0, Math.min(5, Number.isInteger(this.state.currentModule) ? this.state.currentModule : 0));
-    const cleanFinalScore = Math.max(0, Math.min(100, Math.round(Number(this.state.finalScore) || 0)));
-    const cleanCourseStatus = (['passed', 'failed', 'incomplete'].includes(this.state.courseStatus))
-      ? this.state.courseStatus
-      : 'incomplete';
-    const cleanCompletedModules = Array.isArray(this.state.completedModules)
-      ? [...new Set(this.state.completedModules.filter(n => Number.isInteger(n) && n >= 0 && n <= 5))].sort((a, b) => a - b)
-      : [];
+    const cleanFinalScore = sanitizeScore(this.state.finalScore);
+    const cleanCourseStatus = sanitizeCourseStatus(this.state.courseStatus);
+    const cleanCompletedModules = sanitizeCompletedModules(this.state.completedModules);
 
     // Actualiza ubicación en LMS asegurando módulo clamped
     this.adapter.setValue('cmi.core.lesson_location', `mod-${cleanCurrentModule}`);
@@ -331,10 +368,14 @@ export class CourseStore {
       }
 
       case 'COMPLETE_MODULE': {
-        const modId = payload.moduleId ?? payload;
-        if (modId !== undefined && !this.state.completedModules.includes(modId)) {
-          this.state.completedModules = [...this.state.completedModules, modId];
-          hasChanged = true;
+        const rawMod = (typeof payload === 'object' && payload !== null)
+          ? (payload.moduleIndex ?? payload.moduleId)
+          : payload;
+        if (typeof rawMod === 'number' && Number.isInteger(rawMod) && rawMod >= 0 && rawMod <= 5) {
+          if (!this.state.completedModules.includes(rawMod)) {
+            this.state.completedModules = sanitizeCompletedModules([...this.state.completedModules, rawMod]);
+            hasChanged = true;
+          }
         }
         break;
       }
