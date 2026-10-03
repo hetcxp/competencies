@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" role="img" aria-label="Alles 4-Part Formula">
+  <title>Definition Engineering • Martha Alles Formula</title>
+  <desc>Modular framework of the 4 structural components of a competency definition: Verb, Object, Context, and Purpose.</desc>
+  <defs>
+    <filter id="blockShadowEn" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="280" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="400" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="1.2">TECHNICAL COMPETENCY SYNTAX • ALLES METHODOLOGY</text>
+  <text x="400" y="56" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="17" font-weight="800" fill="#0F172A">The Inseparable Four-Component Formula</text>
+
+  <!-- 4 Blocks -->
+  <!-- Block 1: Verb -->
+  <g transform="translate(30, 80)" filter="url(#blockShadowEn)">
+    <rect width="165" height="140" rx="8" fill="#FFFFFF" stroke="#0F766E" stroke-width="2"/>
+    <rect x="0" y="0" width="165" height="32" rx="8" fill="#0F766E"/>
+    <text x="82" y="21" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">1. VERB</text>
+    <text x="82" y="54" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F172A">Observable Action</text>
+    <line x1="20" y1="64" x2="145" y2="64" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="82" y="82" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">Always in infinitive</text>
+    <text x="82" y="98" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">(Design, Direct,</text>
+    <text x="82" y="114" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">Articulate, Calibrate)</text>
+    <rect x="15" y="122" width="135" height="12" rx="2" fill="#F0FDFA"/>
+  </g>
+
+  <!-- Plus 1 -->
+  <text x="207" y="155" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900" fill="#0F766E">+</text>
+
+  <!-- Block 2: Object -->
+  <g transform="translate(220, 80)" filter="url(#blockShadowEn)">
+    <rect width="165" height="140" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+    <rect x="0" y="0" width="165" height="32" rx="8" fill="#0D9488"/>
+    <text x="82" y="21" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">2. OBJECT</text>
+    <text x="82" y="54" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F172A">Direct Scope</text>
+    <line x1="20" y1="64" x2="145" y2="64" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="82" y="82" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">Content or domain</text>
+    <text x="82" y="98" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">governed by the</text>
+    <text x="82" y="114" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">technical behavior</text>
+    <rect x="15" y="122" width="135" height="12" rx="2" fill="#F0FDFA"/>
+  </g>
+
+  <!-- Plus 2 -->
+  <text x="397" y="155" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900" fill="#0D9488">+</text>
+
+  <!-- Block 3: Context -->
+  <g transform="translate(410, 80)" filter="url(#blockShadowEn)">
+    <rect width="170" height="140" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="2"/>
+    <rect x="0" y="0" width="170" height="32" rx="8" fill="#14B8A6"/>
+    <text x="85" y="21" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">3. CONTEXT</text>
+    <text x="85" y="54" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F172A">Operating Condition</text>
+    <line x1="20" y1="64" x2="150" y2="64" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="85" y="82" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">Environment or</text>
+    <text x="85" y="98" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">degree of corporate</text>
+    <text x="85" y="114" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">uncertainty</text>
+    <rect x="15" y="122" width="140" height="12" rx="2" fill="#F0FDFA"/>
+  </g>
+
+  <!-- Plus 3 -->
+  <text x="592" y="155" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900" fill="#14B8A6">+</text>
+
+  <!-- Block 4: Purpose -->
+  <g transform="translate(605, 80)" filter="url(#blockShadowEn)">
+    <rect width="165" height="140" rx="8" fill="#FFFFFF" stroke="#0F766E" stroke-width="2"/>
+    <rect x="0" y="0" width="165" height="32" rx="8" fill="#0F766E"/>
+    <text x="82" y="21" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">4. PURPOSE</text>
+    <text x="82" y="54" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F172A">Business Impact</text>
+    <line x1="20" y1="64" x2="145" y2="64" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="82" y="82" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">Strategic goal;</text>
+    <text x="82" y="98" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">direct anchoring</text>
+    <text x="82" y="114" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">to organizational value</text>
+    <rect x="15" y="122" width="135" height="12" rx="2" fill="#F0FDFA"/>
+  </g>
+
+  <!-- Result Bracket -->
+  <g transform="translate(40, 235)">
+    <rect width="720" height="28" rx="6" fill="#F0FDFA" stroke="#0F766E" stroke-width="1"/>
+    <text x="360" y="19" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F766E">
+      = OBSERVABLE, VALID CONCEPTUAL DEFINITION FREE FROM MORAL BIAS
+    </text>
+  </g>
+</svg>

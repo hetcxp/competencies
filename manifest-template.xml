@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="COURSE_ALLES_METODOLOGIA_2026" version="1.0"
+          xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+          xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                              http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                              http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ALLES_METODOLOGIA_ORG">
+    <organization identifier="ALLES_METODOLOGIA_ORG">
+      <title>Metodología Martha Alles: Creación y Calibración de Competencias Laborales</title>
+      <item identifier="ITEM_COURSE_ALLES" identifierref="RES_COURSE_ALLES">
+        <title>Curso Metodología Martha Alles</title>
+        <adlcp:masteryscore>100</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES_COURSE_ALLES" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html" />
+      <file href="css/mint-theme.css" />
+      <file href="css/rise-blocks.css" />
+      <file href="js/core/scorm-adapter.js" />
+      <file href="js/core/store.js" />
+      <file href="js/data/modules-content.js" />
+      <file href="js/data/theory-drawers.js" />
+      <file href="js/services/challenge-engine.js" />
+      <file href="js/services/rubric-evaluator.js" />
+      <file href="js/services/docx-exporter.js" />
+      <file href="js/ui/router.js" />
+      <file href="js/ui/scenario-block.js" />
+      <file href="js/ui/theory-drawer.js" />
+      <file href="js/ui/sorting-block.js" />
+      <file href="js/ui/chat-simulator.js" />
+      <file href="assets/img/diagrams/trilogia-circuito.svg" />
+      <file href="assets/img/diagrams/trilogia-circuito-en.svg" />
+      <file href="assets/img/diagrams/dual-track-pathway.svg" />
+      <file href="assets/img/diagrams/dual-track-pathway-en.svg" />
+      <file href="assets/img/diagrams/iceberg-spencer-alles.svg" />
+      <file href="assets/img/diagrams/iceberg-spencer-alles-en.svg" />
+      <file href="assets/img/diagrams/formula-alles-blocks.svg" />
+      <file href="assets/img/diagrams/formula-alles-blocks-en.svg" />
+      <file href="assets/img/diagrams/matriz-cardinales-especificas.svg" />
+      <file href="assets/img/diagrams/matriz-cardinales-especificas-en.svg" />
+      <file href="assets/img/diagrams/escala-bars-jaques.svg" />
+      <file href="assets/img/diagrams/escala-bars-jaques-en.svg" />
+      <file href="assets/img/diagrams/flujo-star-sondeo.svg" />
+      <file href="assets/img/diagrams/flujo-star-sondeo-en.svg" />
+      <file href="assets/img/diagrams/ficha-tecnica-blueprint.svg" />
+      <file href="assets/img/diagrams/ficha-tecnica-blueprint-en.svg" />
+      <file href="assets/img/scenarios/scenario-novatech-crisis.svg" />
+      <file href="assets/img/scenarios/scenario-novatech-crisis-en.svg" />
+      <file href="assets/img/scenarios/scenario-broken-artifact.svg" />
+      <file href="assets/img/scenarios/scenario-broken-artifact-en.svg" />
+      <file href="assets/img/scenarios/scenario-gerentes-debate.svg" />
+      <file href="assets/img/scenarios/scenario-gerentes-debate-en.svg" />
+      <file href="assets/img/scenarios/scenario-diplomatic-candidate.svg" />
+      <file href="assets/img/scenarios/scenario-diplomatic-candidate-en.svg" />
+    </resource>
+  </resources>
+</manifest>

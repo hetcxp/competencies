@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" role="img" aria-label="Modelo del Iceberg de Spencer y Martha Alles">
+  <title>El Modelo del Iceberg de Competencias</title>
+  <desc>Diagrama que diferencia las destrezas y conocimientos visibles de los motivos y rasgos profundos de la persona.</desc>
+  <defs>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F0FDFA"/>
+      <stop offset="100%" stop-color="#E0F2FE"/>
+    </linearGradient>
+    <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0284C7" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="icebergTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="icebergBottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#334155" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky Area -->
+  <rect width="800" height="150" fill="url(#skyGrad)"/>
+
+  <!-- Water Area -->
+  <rect y="150" width="800" height="210" fill="url(#waterGrad)"/>
+
+  <!-- Water Line -->
+  <line x1="0" y1="150" x2="800" y2="150" stroke="#38BDF8" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <text x="780" y="142" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#0284C7">LÍNEA DE FLOTACIÓN (Nivel Observable)</text>
+
+  <!-- Iceberg Tip (Visible) -->
+  <polygon points="400,35 480,150 320,150" fill="url(#icebergTop)" stroke="#CBD5E1" stroke-width="1.5"/>
+
+  <!-- Iceberg Underwater (Deep Base) -->
+  <polygon points="320,150 480,150 560,335 240,335" fill="url(#icebergBottom)" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="40" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="1">ONTOLOGÍA • SPENCER &amp; SPENCER / MARTHA ALLES</text>
+  <text x="40" y="54" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="800" fill="#0F172A">El Modelo del Iceberg</text>
+
+  <!-- Labels: Visible Tip -->
+  <g transform="translate(510, 60)">
+    <rect width="250" height="70" rx="6" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.5"/>
+    <text x="12" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#0F766E">CÚSPIDE VISIBLE (Fácil de detectar)</text>
+    <text x="12" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="600" fill="#334155">• Destrezas (Skills): Manejo técnico, software</text>
+    <text x="12" y="58" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="600" fill="#334155">• Conocimientos: Datos teóricos, títulos</text>
+    <line x1="0" y1="35" x2="-30" y2="45" stroke="#0F766E" stroke-width="1.5"/>
+  </g>
+
+  <!-- Labels: Deep Underwater Base -->
+  <g transform="translate(40, 190)">
+    <rect width="250" height="135" rx="6" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+    <text x="12" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#38BDF8">BASE SUMERGIDA (Predictor Real)</text>
+    <text x="12" y="46" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#CBD5E1">• Autoimagen: Rol percibido, autoconfianza</text>
+    <text x="12" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#CBD5E1">• Rasgos: Respuestas consistentes al estrés</text>
+    <text x="12" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#CBD5E1">• Motivos y Valores: Impulsores profundos</text>
+    <rect x="12" y="98" width="226" height="26" rx="4" fill="#1E293B"/>
+    <text x="125" y="115" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#F87171">Difícil de modificar por capacitación</text>
+    <line x1="250" y1="65" x2="310" y2="230" stroke="#38BDF8" stroke-width="1.5"/>
+  </g>
+
+  <!-- Summary Pillar on Right Underwater -->
+  <g transform="translate(580, 200)">
+    <rect width="180" height="110" rx="6" fill="rgba(15, 23, 42, 0.75)" stroke="#38BDF8" stroke-width="1"/>
+    <text x="90" y="25" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="800" fill="#38BDF8">POSTURA ALLES</text>
+    <text x="12" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#FFFFFF">La empresa no debe</text>
+    <text x="12" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#FFFFFF">juzgar la personalidad;</text>
+    <text x="12" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#FFFFFF">debe calibrar conductas</text>
+    <text x="12" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#2DD4BF">observables en el puesto.</text>
+  </g>
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" role="img" aria-label="Martha Alles Trilogy Closed Circuit">
+  <title>The Martha Alles Trilogy as an Integrated System</title>
+  <desc>Diagram illustrating the three interconnected volumes: Competency Dictionary, Behavioral Dictionary, and Question Dictionary.</desc>
+  <defs>
+    <linearGradient id="bgGradEn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#F0FDFA"/>
+    </linearGradient>
+    <linearGradient id="tomo1GradEn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F766E"/>
+      <stop offset="100%" stop-color="#115E59"/>
+    </linearGradient>
+    <linearGradient id="tomo2GradEn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#0F766E"/>
+    </linearGradient>
+    <linearGradient id="tomo3GradEn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="100%" stop-color="#0D9488"/>
+    </linearGradient>
+    <filter id="cardShadowEn" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrowEn" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#0F766E"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="360" rx="12" fill="url(#bgGradEn)" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- Subtitle / Context Header -->
+  <text x="400" y="38" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#0F766E" letter-spacing="1.5">INTEGRATED SCIENTIFIC SYSTEM • MARTHA ALLES</text>
+  <text x="400" y="60" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="800" fill="#0F172A">The Inseparable Competency Circuit</text>
+
+  <!-- Central Hub: Strategy -->
+  <circle cx="400" cy="195" r="54" fill="#FFFFFF" stroke="#0F766E" stroke-width="3" filter="url(#cardShadowEn)"/>
+  <circle cx="400" cy="195" r="46" fill="#F0FDFA" stroke="#CCFBF1" stroke-width="1"/>
+  <text x="400" y="190" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#0F766E">BUSINESS</text>
+  <text x="400" y="206" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#475569">STRATEGY</text>
+
+  <!-- Card 1: Volume I -->
+  <g transform="translate(60, 95)" filter="url(#cardShadowEn)">
+    <rect width="200" height="195" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <path d="M 0 10 Q 0 0 10 0 L 190 0 Q 200 0 200 10 L 200 44 L 0 44 Z" fill="url(#tomo1GradEn)"/>
+    <text x="100" y="28" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">VOLUME I</text>
+    <text x="100" y="68" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#0F172A">Competency</text>
+    <text x="100" y="86" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#0F766E">Dictionary</text>
+    <line x1="25" y1="102" x2="175" y2="102" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="100" y="124" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">• Conceptual Definition</text>
+    <text x="100" y="144" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#64748B">4-part syntax formula</text>
+    <text x="100" y="164" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#64748B">Cardinal &amp; Specific</text>
+    <rect x="25" y="185" width="150" height="24" rx="4" fill="#F0FDFA"/>
+    <text x="100" y="201" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0F766E">WHAT DOES IT MEAN?</text>
+  </g>
+
+  <!-- Card 2: Volume II -->
+  <g transform="translate(540, 95)" filter="url(#cardShadowEn)">
+    <rect width="200" height="195" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <path d="M 0 10 Q 0 0 10 0 L 190 0 Q 200 0 200 10 L 200 44 L 0 44 Z" fill="url(#tomo2GradEn)"/>
+    <text x="100" y="28" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">VOLUME II</text>
+    <text x="100" y="68" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#0F172A">Behavioral</text>
+    <text x="100" y="86" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#0F766E">Dictionary</text>
+    <line x1="25" y1="102" x2="175" y2="102" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="100" y="124" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">• BARS Scale (A-B-C-D)</text>
+    <text x="100" y="144" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#64748B">Elliott Jaques: Autonomy</text>
+    <text x="100" y="164" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#64748B">Horizon &amp; Impact</text>
+    <rect x="25" y="185" width="150" height="24" rx="4" fill="#F0FDFA"/>
+    <text x="100" y="201" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0F766E">HOW IS IT GRADUATED?</text>
+  </g>
+
+  <!-- Card 3: Volume III -->
+  <g transform="translate(300, 240)" filter="url(#cardShadowEn)">
+    <rect width="200" height="105" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <path d="M 0 10 Q 0 0 10 0 L 190 0 Q 200 0 200 10 L 200 30 L 0 30 Z" fill="url(#tomo3GradEn)"/>
+    <text x="100" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">VOLUME III • QUESTIONS</text>
+    <text x="100" y="52" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F172A">Question Dictionary (BBI)</text>
+    <text x="100" y="68" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="500" fill="#64748B">STAR Protocol &amp; Real Probing</text>
+    <rect x="25" y="78" width="150" height="20" rx="3" fill="#F0FDFA"/>
+    <text x="100" y="92" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#0F766E">HOW IS IT AUDITED &amp; EVALUATED?</text>
+  </g>
+
+  <!-- Connecting Curved Arrows -->
+  <path d="M 260 145 C 330 110, 470 110, 534 145" fill="none" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="4 3" marker-end="url(#arrowEn)"/>
+  <text x="400" y="118" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0F766E">Translation to Behavior</text>
+
+  <path d="M 590 290 C 560 320, 520 330, 506 315" fill="none" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="4 3" marker-end="url(#arrowEn)"/>
+  <path d="M 300 315 C 270 330, 230 320, 205 290" fill="none" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="4 3" marker-end="url(#arrowEn)"/>
+</svg>

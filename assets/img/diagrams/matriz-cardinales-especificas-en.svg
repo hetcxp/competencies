@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" role="img" aria-label="Cardinal vs Specific Competencies Matrix">
+  <title>Competency Architecture • Cardinal vs. Specific</title>
+  <desc>Diagram illustrating the distribution of competencies across the entire organization versus department-specific competencies and the Law of Parsimony.</desc>
+  <defs>
+    <filter id="matrixShadowEn" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="320" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <text x="400" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="1.2">ORGANIZATIONAL ARCHITECTURE • LAW OF PARSIMONY</text>
+  <text x="400" y="56" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="17" font-weight="800" fill="#0F172A">Cardinal vs. Specific Competencies</text>
+
+  <!-- Left: Cardinal (Horizontal / Transversal) -->
+  <g transform="translate(40, 80)" filter="url(#matrixShadowEn)">
+    <rect width="340" height="210" rx="8" fill="#F0FDFA" stroke="#0F766E" stroke-width="2"/>
+    <rect x="0" y="0" width="340" height="36" rx="8" fill="#0F766E"/>
+    <text x="170" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">CARDINAL COMPETENCIES</text>
+
+    <text x="20" y="62" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#0F766E">Scope: 100% of All Employees</text>
+    <text x="20" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Apply from Executive Leadership to front-line staff.</text>
+    <text x="20" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Reflect mission, vision, and corporate DNA.</text>
+    <text x="20" y="118" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Examples: Ethics, Commitment, Quality Focus.</text>
+
+    <!-- Parsimony rule -->
+    <rect x="20" y="140" width="300" height="50" rx="6" fill="#FFFFFF" stroke="#99F6E4" stroke-width="1"/>
+    <text x="170" y="160" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#0F766E">ALLES LAW OF PARSIMONY:</text>
+    <text x="170" y="178" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#0D9488">Maximum 3 to 5 cardinal competencies</text>
+  </g>
+
+  <!-- Right: Specific (Vertical / Segregated) -->
+  <g transform="translate(420, 80)" filter="url(#matrixShadowEn)">
+    <rect width="340" height="210" rx="8" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+    <rect x="0" y="0" width="340" height="36" rx="8" fill="#334155"/>
+    <text x="170" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">SPECIFIC COMPETENCIES</text>
+
+    <text x="20" y="62" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#1E293B">Scope: By Job Family or Hierarchy</text>
+    <text x="20" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Managerial Specific (Strategic Leadership, Negotiation).</text>
+    <text x="20" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Technical Specific by Area (Finance, IT, Sales Ops).</text>
+    <text x="20" y="118" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Graduated at varying depths depending on role.</text>
+
+    <rect x="20" y="140" width="300" height="50" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="170" y="160" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#334155">COGNITIVE LIMIT PER ROLE:</text>
+    <text x="170" y="178" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#64748B">Do not exceed 7 to 8 total competencies</text>
+  </g>
+</svg>

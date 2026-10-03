@@ -1,0 +1,2326 @@
+/**
+ * Rise Blocks - Component Design System
+ * Arquitectura de Bloques Modulares estilo Articulate Rise
+ * Identidad Mint Theme - Metodología Martha Alles
+ */
+
+/* ==========================================================================
+   1. Shell Layout & Sticky Top Bar
+   ========================================================================== */
+
+.rise-app-layout,
+.rise-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-bg);
+}
+
+/* Sticky Top Bar & Course Progress Header */
+.rise-top-bar,
+.rise-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--slate-200);
+  box-shadow: var(--shadow-sm);
+  padding: 0.85rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.rise-header-inner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rise-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.rise-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: linear-gradient(135deg, var(--mint-dark, #0F766E), var(--mint-darker, #115E59));
+  color: #FFFFFF;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rise-brand-title,
+.rise-course-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.rise-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Progress Widget in Top Bar */
+.rise-progress-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  min-width: 220px;
+}
+
+.rise-progress-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--slate-600);
+}
+
+.rise-progress-label {
+  color: var(--slate-500);
+}
+
+.rise-progress-value {
+  color: var(--mint-darker);
+  font-weight: 800;
+}
+
+.rise-progress-track,
+.rise-progress-container,
+.rise-progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: var(--slate-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.rise-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mint-primary), var(--mint-dark));
+  transition: width var(--transition-smooth);
+  width: 0%;
+}
+
+/* Two-Column Responsive Body Layout */
+.rise-body-layout {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: calc(100vh - 61px);
+}
+
+/* Left Sidebar - Navigation & Table of Contents */
+.rise-sidebar {
+  width: 340px;
+  flex-shrink: 0;
+  background-color: #FFFFFF;
+  border-right: 1px solid var(--slate-200);
+  padding: 1.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: 61px;
+  height: calc(100vh - 61px);
+  overflow-y: auto;
+}
+
+.rise-sidebar-header {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.rise-sidebar-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate-600, #475569);
+}
+
+.rise-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rise-nav-item {
+  margin: 0;
+  padding: 0;
+}
+
+.rise-nav-btn {
+  width: 100%;
+  text-align: left;
+  background-color: transparent;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  position: relative;
+}
+
+.rise-nav-btn:hover {
+  background-color: var(--mint-light);
+  border-color: var(--mint-border);
+}
+
+.rise-nav-btn.is-active {
+  background-color: var(--mint-light);
+  border-color: var(--mint-dark);
+  box-shadow: 0 2px 8px -1px rgba(13, 148, 136, 0.15);
+}
+
+.rise-nav-status {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  background-color: var(--surface-muted);
+  color: var(--slate-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all var(--transition-fast);
+}
+
+.rise-nav-btn.is-active .rise-nav-status {
+  background: linear-gradient(135deg, var(--mint-dark, #0F766E), var(--mint-darker, #115E59));
+  color: #FFFFFF;
+}
+
+.rise-nav-btn.is-completed .rise-nav-status {
+  background: var(--golden-green, #047857);
+  color: #FFFFFF;
+}
+
+.rise-nav-btn.is-locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.rise-nav-btn.is-locked:hover {
+  background-color: transparent;
+  transform: none;
+}
+
+.rise-nav-btn.is-locked .rise-nav-status {
+  background-color: var(--slate-200);
+  color: var(--slate-600);
+  border-color: var(--slate-300);
+}
+
+.rise-nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.rise-nav-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--mint-darker);
+}
+
+.rise-nav-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--slate-800);
+  line-height: 1.35;
+}
+
+.rise-nav-btn.is-active .rise-nav-label {
+  color: var(--slate-900);
+  font-weight: 700;
+}
+
+.rise-theory-badges-box {
+  margin-top: auto;
+  padding: 1.15rem;
+  background: linear-gradient(135deg, var(--mint-light), #FFFFFF);
+  border: 1px solid var(--mint-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Main Content Area - Articulate Rise Viewport */
+.rise-main-content,
+.rise-main-container {
+  flex: 1;
+  min-width: 0;
+  padding: 3rem 2.5rem 6rem;
+  background-color: var(--surface-bg);
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.rise-module-card {
+  max-width: 860px;
+  width: 100%;
+}
+
+.rise-module-header {
+  margin-bottom: 2.5rem;
+}
+
+.rise-module-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.rise-module-duration {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--slate-600);
+  background: var(--surface-muted);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.rise-module-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.rise-module-subtitle {
+  font-size: 1.1rem;
+  color: var(--slate-600);
+  line-height: 1.6;
+}
+
+.rise-module-lead-intro {
+  margin-top: 1rem;
+  padding: 0.4rem 0 0.4rem 1rem;
+  background: transparent;
+  border-left: 3px solid #CBD5E1;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.rise-module-lead-intro p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--slate-600, #475569);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.rise-objective-callout {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: #F0FDFA;
+  border: 1px solid #CCFBF1;
+  border-left: 4px solid var(--mint-dark, #0F766E);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.07);
+}
+
+.rise-objective-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--mint-dark, #0F766E);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  margin-bottom: 0.45rem;
+}
+
+.rise-objective-callout p {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--slate-800, #1E293B);
+  line-height: 1.55;
+}
+
+.rise-btn-theory-drawer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--mint-light);
+  border: 1.5px solid var(--mint-border);
+  color: var(--mint-darker);
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.rise-btn-theory-drawer:hover {
+  background: var(--mint-subtle);
+  border-color: var(--mint-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.rise-module-interactive-area {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.rise-module-footer {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--slate-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   2. Modular Rise Blocks: Scenario Block (Challenge-First)
+   ========================================================================== */
+
+.rise-block-scenario {
+  margin-bottom: 2.5rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.rise-scenario-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.rise-scenario-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--mint-primary), var(--mint-dark));
+}
+
+.rise-scenario-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.rise-scenario-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--alert-red-light);
+  color: var(--alert-red-dark);
+  border: 1px solid var(--alert-red-border);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rise-scenario-badge--challenge {
+  background-color: var(--amber-warning-light);
+  color: #B45309;
+  border-color: var(--amber-warning-border);
+}
+
+.rise-scenario-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+.rise-scenario-context {
+  background-color: var(--surface-bg);
+  border-left: 4px solid var(--mint-dark);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.75rem;
+  color: var(--slate-700);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.rise-scenario-context strong {
+  color: var(--slate-900);
+}
+
+.rise-choices-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.rise-choices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.rise-choice-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+  background-color: #FFFFFF;
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem 1.25rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--slate-800);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  font-family: inherit;
+}
+
+.rise-choice-btn:hover:not(:disabled) {
+  border-color: var(--mint-primary);
+  background-color: var(--mint-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.rise-choice-btn:focus-visible {
+  outline: 2px solid var(--mint-primary);
+  outline-offset: 2px;
+}
+
+.rise-choice-btn.is-selected {
+  border-color: var(--mint-dark);
+  background-color: var(--mint-light);
+  box-shadow: 0 0 0 1px var(--mint-dark);
+}
+
+.rise-choice-btn.is-incorrect {
+  border-color: var(--alert-red);
+  background-color: var(--alert-red-light);
+}
+
+.rise-choice-btn.is-correct {
+  border-color: var(--golden-green);
+  background-color: var(--golden-green-light);
+}
+
+.rise-choice-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-muted);
+  color: var(--slate-700);
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.rise-choice-btn:hover:not(:disabled) .rise-choice-key {
+  background-color: var(--mint-dark, #0F766E);
+  color: #FFFFFF;
+}
+
+.rise-choice-btn.is-selected .rise-choice-key {
+  background-color: var(--mint-darker, #115E59);
+  color: #FFFFFF;
+}
+
+.rise-choice-text {
+  flex: 1;
+}
+
+/* ==========================================================================
+   3. Consequence & JIT Feedback Card
+   ========================================================================== */
+
+.rise-feedback-card {
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  margin-top: 1.5rem;
+  border: 1px solid transparent;
+  animation: slideUp 0.3s ease-out;
+}
+
+.rise-feedback-card--failure {
+  background-color: var(--alert-red-light);
+  border-color: var(--alert-red-border);
+  color: var(--slate-900);
+}
+
+.rise-feedback-card--success {
+  background-color: var(--golden-green-light);
+  border-color: var(--golden-green-border);
+  color: var(--slate-900);
+}
+
+.rise-feedback-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.rise-feedback-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.rise-feedback-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.rise-feedback-card--failure .rise-feedback-title {
+  color: var(--alert-red-dark);
+}
+
+.rise-feedback-card--success .rise-feedback-title {
+  color: var(--golden-green-dark);
+}
+
+.rise-feedback-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--slate-700);
+  margin-bottom: 1rem;
+}
+
+/* Píldora Just-in-Time (Kathy Moore) */
+.rise-jit-box {
+  background-color: #FFFFFF;
+  border: 1px solid var(--mint-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.rise-jit-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--mint-darker);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+}
+
+.rise-jit-body {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--slate-800);
+}
+
+.rise-jit-intro {
+  margin-bottom: 0.75rem;
+}
+
+.rise-jit-section-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--mint-darker);
+  margin-bottom: 0.35rem;
+}
+
+.rise-jit-formula-box {
+  background: var(--mint-light);
+  border: 1px solid var(--mint-border);
+  border-left: 4px solid var(--mint-dark);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  margin: 0.85rem 0;
+}
+
+.rise-jit-formula-code {
+  margin-top: 0.35rem;
+}
+
+.rise-jit-formula-code code {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--slate-900);
+  background: #FFFFFF;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  display: block;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+.rise-jit-components-box {
+  margin: 0.85rem 0;
+}
+
+.rise-jit-components-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rise-jit-component-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--surface-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+}
+
+.rise-jit-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  background: var(--mint-dark);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: var(--radius-full);
+}
+
+.rise-jit-component-body {
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.rise-jit-component-header {
+  line-height: 1.5;
+}
+
+.rise-jit-component-name {
+  color: var(--slate-900);
+}
+
+.rise-jit-component-desc {
+  color: var(--slate-700);
+  margin-left: 0.25rem;
+}
+
+/* Grilla de Ejemplos y Contra-ejemplos en Componentes JIT */
+.rise-jit-examples-grid {
+  margin-top: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.rise-jit-example-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.84rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: var(--radius-sm);
+  line-height: 1.45;
+}
+
+.rise-jit-example-row--good {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-left: 3.5px solid #059669;
+  color: var(--slate-900);
+}
+
+.rise-jit-example-tag--good {
+  font-weight: 700;
+  color: #047857;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.rise-jit-example-row--bad {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 3.5px solid #DC2626;
+  color: var(--slate-900);
+}
+
+.rise-jit-example-tag--bad {
+  font-weight: 700;
+  color: #B91C1C;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.rise-jit-example-text {
+  flex: 1;
+  color: var(--slate-800);
+}
+
+.rise-jit-levels-box {
+  margin: 0.85rem 0;
+}
+
+.rise-jit-levels-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rise-jit-level-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--surface-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+}
+
+.rise-jit-level-item .rise-level-badge {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.rise-jit-level-body {
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.rise-jit-level-name {
+  color: var(--slate-900);
+  margin-right: 0.25rem;
+}
+
+.rise-jit-level-desc {
+  color: var(--slate-700);
+}
+
+/* Reglas Clave / Reglas de Oro con alta prominencia visual */
+.rise-jit-takeaways-box {
+  background: linear-gradient(135deg, #FFFDF5 0%, #FEF9C3 100%);
+  border: 1.5px solid #F59E0B;
+  border-left: 5px solid #D97706;
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.35rem;
+  margin-top: 1.25rem;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.12);
+}
+
+.rise-jit-takeaways-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.rise-jit-takeaways-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  background: #B45309;
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border-radius: var(--radius-full);
+}
+
+.rise-jit-takeaways-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #92400E;
+}
+
+.rise-jit-takeaways-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rise-jit-takeaway-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background: #FFFFFF;
+  border: 1px solid rgba(217, 119, 6, 0.28);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.rise-jit-takeaway-icon {
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #B45309;
+}
+
+.rise-jit-takeaway-content {
+  flex: 1;
+  color: var(--slate-900);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.rise-jit-takeaway-lead {
+  color: #92400E;
+  font-weight: 700;
+}
+
+.rise-jit-takeaway-desc {
+  color: var(--slate-800);
+}
+
+/* ==========================================================================
+   4. Deep-Dive Theory Drawer (Off-Canvas Accessible Panel)
+   ========================================================================== */
+
+.rise-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.rise-drawer-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.rise-drawer-theory {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 720px;
+  background-color: #FFFFFF;
+  z-index: 110;
+  box-shadow: -15px 0 50px -10px rgba(15, 23, 42, 0.28);
+  border-left: 1px solid var(--border-subtle);
+  transform: translateX(100%);
+  transition: transform var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.rise-drawer-theory.is-open {
+  transform: translateX(0);
+}
+
+.rise-drawer-header {
+  background: linear-gradient(135deg, #094E46 0%, #0F766E 50%, #115E59 100%);
+  color: #FFFFFF;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(13, 148, 136, 0.15);
+}
+
+.rise-drawer-tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #FFFFFF;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.rise-drawer-title {
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.rise-drawer-close {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.rise-drawer-close:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  transform: scale(1.08);
+}
+
+.rise-drawer-close:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+.rise-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2.25rem 2rem 3rem;
+  color: var(--slate-800);
+  scrollbar-width: thin;
+  scrollbar-color: #CBD5E1 #F8FAFC;
+}
+
+.rise-drawer-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rise-drawer-body::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+
+.rise-drawer-body::-webkit-scrollbar-thumb {
+  background-color: #CBD5E1;
+  border-radius: 4px;
+}
+
+.rise-drawer-body::-webkit-scrollbar-thumb:hover {
+  background-color: #475569;
+}
+
+/* Tipografía y Jerarquía de Fundamentos Teóricos */
+.rise-drawer-content-serif {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--slate-700);
+}
+
+.theory-deep-dive {
+  display: flex;
+  flex-direction: column;
+}
+
+.theory-deep-dive h4,
+.rise-drawer-content-serif h4 {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin: 2.25rem 0 0.85rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid var(--mint-subtle);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.theory-deep-dive h4:first-child,
+.rise-drawer-content-serif h4:first-of-type {
+  margin-top: 0;
+}
+
+.theory-deep-dive h5,
+.rise-drawer-content-serif h5 {
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--mint-darker);
+  margin: 1.4rem 0 0.5rem;
+}
+
+.theory-deep-dive p,
+.rise-drawer-content-serif p {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--slate-700);
+  margin-bottom: 1.15rem;
+}
+
+.theory-deep-dive strong,
+.rise-drawer-content-serif strong {
+  color: var(--slate-900);
+  font-weight: 700;
+}
+
+.theory-deep-dive em,
+.rise-drawer-content-serif em {
+  color: var(--slate-800);
+  font-style: italic;
+}
+
+/* Listas estilizadas en Fundamentos Teóricos */
+.theory-deep-dive ul,
+.rise-drawer-content-serif ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0.5rem 0 1.25rem 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.theory-deep-dive ul li,
+.rise-drawer-content-serif ul li {
+  position: relative;
+  padding-left: 1.5rem !important;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.theory-deep-dive ul li::before,
+.rise-drawer-content-serif ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0.35rem;
+  top: -0.05rem;
+  color: var(--mint-dark);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* Cajas Callout de Teoría */
+.theory-callout {
+  background: linear-gradient(135deg, #F0FDFA 0%, #E6FFFA 100%) !important;
+  border: 1px solid #CCFBF1 !important;
+  border-left: 4px solid var(--mint-dark) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 1.25rem 1.4rem !important;
+  margin: 1.4rem 0 !important;
+  box-shadow: 0 2px 10px rgba(13, 148, 136, 0.05);
+}
+
+.theory-callout p {
+  color: var(--slate-800) !important;
+  font-size: 0.94rem !important;
+  line-height: 1.65 !important;
+  margin-bottom: 0.6rem !important;
+}
+
+.theory-callout ul {
+  margin: 0.4rem 0 0 !important;
+}
+
+.theory-callout ul li {
+  color: var(--slate-800) !important;
+  font-size: 0.92rem !important;
+}
+
+/* Bloques de Código y Fórmulas Sintácticas */
+.theory-deep-dive code,
+.rise-drawer-content-serif code {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  background: #0F172A;
+  color: #2DD4BF;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.theory-deep-dive p > code:only-child,
+.rise-drawer-content-serif p > code:only-child {
+  display: block;
+  padding: 1.1rem 1.35rem;
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  color: #5EEAD4;
+  border-left: 4px solid var(--mint-primary);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.12);
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0.75rem 0 1.25rem;
+}
+
+/* Tablas Teóricas (BARS, Moodle, Tríada Ontológica) */
+.theory-deep-dive table,
+.rise-drawer-content-serif table,
+.rise-drawer-content-serif .rise-table {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin: 1.5rem 0 !important;
+  background: #FFFFFF !important;
+  border: 1px solid var(--slate-200) !important;
+  border-radius: var(--radius-md) !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04) !important;
+}
+
+.theory-deep-dive thead tr,
+.rise-drawer-content-serif thead tr {
+  background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%) !important;
+}
+
+.theory-deep-dive th,
+.rise-drawer-content-serif th {
+  padding: 0.85rem 1rem !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--slate-800) !important;
+  border-bottom: 2px solid var(--slate-200) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: 1px solid var(--slate-200) !important;
+  text-align: left !important;
+}
+
+.theory-deep-dive th:last-child,
+.rise-drawer-content-serif th:last-child {
+  border-right: none !important;
+}
+
+.theory-deep-dive td,
+.rise-drawer-content-serif td {
+  padding: 0.85rem 1rem !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+  color: var(--slate-700) !important;
+  border-bottom: 1px solid var(--slate-200) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: 1px solid var(--slate-200) !important;
+  vertical-align: middle !important;
+}
+
+.theory-deep-dive td:last-child,
+.rise-drawer-content-serif td:last-child {
+  border-right: none !important;
+}
+
+.theory-deep-dive tbody tr:last-child td,
+.rise-drawer-content-serif tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.theory-deep-dive tbody tr:nth-child(even),
+.rise-drawer-content-serif tbody tr:nth-child(even) {
+  background-color: #FAFCFE !important;
+}
+
+.theory-deep-dive tbody tr:hover,
+.rise-drawer-content-serif tbody tr:hover {
+  background-color: #F0FDFA !important;
+  transition: background-color var(--transition-fast) !important;
+}
+
+/* Citas y Blockquotes */
+.theory-deep-dive blockquote,
+.rise-drawer-content-serif blockquote {
+  border-left: 4px solid var(--mint-primary) !important;
+  background: var(--surface-bg) !important;
+  padding: 1.15rem 1.4rem !important;
+  margin: 1.35rem 0 !important;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0 !important;
+  font-style: italic !important;
+  color: var(--slate-800) !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+}
+
+/* Tarjeta de Referencia Académica */
+.rise-drawer-meta-card {
+  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%) !important;
+  border: 1px solid var(--slate-200) !important;
+  border-left: 4px solid var(--mint-dark) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 1.25rem 1.4rem !important;
+  margin-top: 2.25rem !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.88rem !important;
+  color: var(--slate-700) !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+  line-height: 1.6 !important;
+}
+
+.rise-drawer-meta-card strong {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mint-darker);
+  margin-bottom: 0.4rem;
+}
+
+/* Banner de Estado de Actividades del Módulo */
+.rise-module-status-banner {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  transition: all var(--transition-base);
+}
+
+.rise-module-status-banner--completed {
+  background: var(--golden-green-light);
+  border: 1px solid var(--golden-green-border);
+  color: var(--golden-green-dark);
+}
+
+.rise-module-status-banner--pending {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  color: #92400E;
+}
+
+.rise-module-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.rise-module-status-badge--completed {
+  background: var(--golden-green, #047857);
+  color: #FFFFFF;
+}
+
+.rise-module-status-badge--pending {
+  background: var(--amber-warning, #B45309);
+  color: #FFFFFF;
+}
+
+.rise-activity-tag {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+/* ==========================================================================
+   5. Sorting Block (Clasificador Cuatridimensional A-B-C-D)
+   ========================================================================== */
+
+.rise-block-sorting {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 2.5rem;
+}
+
+.rise-sorting-lead {
+  margin-bottom: 1.75rem;
+}
+
+.rise-sorting-lead h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin-bottom: 0.5rem;
+}
+
+.rise-sorting-items-pool {
+  background-color: var(--surface-bg);
+  border: 2px dashed var(--slate-300);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.rise-pool-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rise-item-pill {
+  background-color: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--slate-800);
+  cursor: grab;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.rise-item-pill:hover {
+  border-color: var(--mint-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.rise-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.rise-slot-card {
+  border: 2px dashed var(--slate-300);
+  border-radius: var(--radius-lg);
+  background-color: #FFFFFF;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  cursor: pointer;
+}
+
+.rise-slot-card:focus-visible,
+.rise-sorting-items-pool:focus-visible {
+  outline: 2px solid var(--mint-primary);
+  outline-offset: 2px;
+}
+
+.rise-slot-card.is-drag-over {
+  border-color: var(--mint-primary);
+  background-color: var(--mint-light);
+}
+
+.rise-slot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.rise-level-badge {
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.rise-level-badge--a { background: var(--level-a-bg); color: var(--level-a-color); }
+.rise-level-badge--b { background: var(--level-b-bg); color: var(--level-b-color); }
+.rise-level-badge--c { background: var(--level-c-bg); color: var(--level-c-color); }
+.rise-level-badge--d { background: var(--level-d-bg); color: var(--level-d-color); }
+
+.rise-slot-target {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* ==========================================================================
+   6. Chat Simulator (BBI / STAR Probing Engine)
+   ========================================================================== */
+
+.rise-chat-simulator {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 2.5rem;
+}
+
+.rise-chat-header {
+  background: var(--slate-900);
+  color: #FFFFFF;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rise-candidate-info {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.rise-candidate-avatar {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-full);
+  background-color: var(--slate-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.rise-candidate-details h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.rise-candidate-details span {
+  font-size: 0.8rem;
+  color: var(--slate-300, #CBD5E1);
+}
+
+.rise-chat-conversation {
+  background-color: var(--surface-bg);
+  padding: 1.75rem 1.5rem;
+  min-height: 260px;
+  max-height: 380px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rise-dialogue-bubble {
+  max-width: 82%;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  box-shadow: var(--shadow-sm);
+}
+
+.rise-dialogue-bubble--candidate {
+  align-self: flex-start;
+  background-color: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  color: var(--slate-800);
+  border-bottom-left-radius: var(--radius-xs);
+}
+
+.rise-dialogue-bubble--interviewer {
+  align-self: flex-end;
+  background-color: var(--mint-dark);
+  color: #FFFFFF;
+  border-bottom-right-radius: var(--radius-xs);
+}
+
+.rise-chat-controls {
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--slate-200);
+  padding: 1.5rem;
+}
+
+.rise-probing-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.85rem;
+}
+
+/* ==========================================================================
+   7. Capstone Studio & Rubric Matrix
+   ========================================================================== */
+
+.rise-rubric-matrix {
+  background-color: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.rise-rubric-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--slate-100);
+  transition: background-color var(--transition-fast);
+}
+
+.rise-rubric-row:last-child {
+  border-bottom: none;
+}
+
+.rise-rubric-row.is-passed {
+  background-color: var(--golden-green-light);
+}
+
+.rise-rubric-checkbox {
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-top: 0.2rem;
+  accent-color: var(--mint-dark);
+  cursor: pointer;
+}
+
+.rise-rubric-info {
+  flex: 1;
+}
+
+.rise-rubric-code {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--mint-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.rise-rubric-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin-bottom: 0.35rem;
+}
+
+.rise-rubric-desc {
+  font-size: 0.88rem;
+  color: var(--slate-600);
+  line-height: 1.5;
+}
+
+.rise-audit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.rise-audit-badge--pass {
+  background-color: var(--golden-green-light);
+  color: var(--golden-green-dark);
+  border: 1px solid var(--golden-green-border);
+}
+
+.rise-audit-badge--fail {
+  background-color: var(--alert-red-light);
+  color: var(--alert-red-dark);
+  border: 1px solid var(--alert-red-border);
+}
+
+/* ==========================================================================
+   8. Contrast Boxes: Antipatterns & Golden Rules
+   ========================================================================== */
+
+.rise-contrast-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .rise-contrast-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.rise-antipattern-box {
+  background-color: var(--alert-red-light);
+  border: 1px solid var(--alert-red-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+}
+
+.rise-antipattern-tag {
+  color: var(--alert-red-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.rise-golden-box {
+  background-color: var(--golden-green-light);
+  border: 1px solid var(--golden-green-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+}
+
+.rise-golden-tag {
+  color: var(--golden-green-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ==========================================================================
+   9. Buttons & Interactive Controls
+   ========================================================================== */
+
+.rise-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.rise-btn-primary {
+  background: linear-gradient(135deg, var(--mint-dark, #0F766E), var(--mint-darker, #115E59));
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+.rise-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--mint-darker, #115E59), #134E4A);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.rise-btn-secondary {
+  background-color: #FFFFFF;
+  border: 1px solid var(--slate-300);
+  color: var(--slate-700);
+}
+
+.rise-btn-secondary:hover:not(:disabled) {
+  border-color: var(--mint-primary);
+  color: var(--mint-dark);
+  background-color: var(--mint-light);
+}
+
+.rise-btn-theory {
+  background-color: var(--surface-bg);
+  border: 1px solid var(--mint-border);
+  color: var(--mint-darker);
+  font-size: 0.88rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--radius-full);
+}
+
+.rise-btn-theory:hover {
+  background-color: var(--mint-light);
+  border-color: var(--mint-dark);
+}
+
+.rise-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ==========================================================================
+   Semantic Exercise Transition & Pedagogical Bridge (Modules 2, 3, 4)
+   ========================================================================== */
+
+.rise-exercise-transition {
+  margin: 2.75rem 0 1.25rem 0;
+  position: relative;
+  animation: fadeIn 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rise-transition-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.rise-transition-divider::before,
+.rise-transition-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--slate-300), transparent);
+}
+
+.rise-transition-connector {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.95rem;
+  background: #FFFFFF;
+  border: 1px solid var(--slate-300);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: var(--shadow-sm);
+}
+
+.rise-transition-connector-icon {
+  color: var(--mint-dark);
+  font-size: 0.85rem;
+}
+
+.rise-transition-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--mint-light) 100%);
+  border: 1px solid var(--mint-border);
+  border-left: 5px solid var(--mint-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 4px 14px -3px rgba(15, 118, 110, 0.09), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.rise-transition-card:hover {
+  box-shadow: 0 8px 20px -4px rgba(15, 118, 110, 0.12), 0 4px 8px -2px rgba(15, 23, 42, 0.06);
+}
+
+.rise-transition-header {
+  margin-bottom: 0.75rem;
+}
+
+.rise-transition-badge-row {
+  margin-bottom: 0.5rem;
+}
+
+.rise-transition-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--mint-light);
+  color: var(--mint-dark);
+  border: 1px solid var(--mint-subtle);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rise-transition-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--mint-primary);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.25);
+}
+
+.rise-transition-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.rise-transition-lead {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--slate-800);
+  line-height: 1.55;
+  margin: 0 0 0.5rem 0;
+}
+
+.rise-transition-desc {
+  font-size: 0.92rem;
+  color: var(--slate-700);
+  line-height: 1.6;
+  margin: 0 0 0.85rem 0;
+}
+
+.rise-transition-focus {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px dashed var(--mint-border);
+  border-left: 3px solid var(--mint-primary);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--slate-800);
+  line-height: 1.5;
+}
+
+.rise-transition-focus-icon {
+  font-size: 1.05rem;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+.rise-transition-focus-text {
+  flex: 1;
+}
+
+/* ==========================================================================
+   10. Module Specialized Components: Practice Builder & Capstone Studio
+   ========================================================================== */
+
+/* Module 1: Formula Builder */
+.rise-builder-card {
+  background: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  margin-top: 2rem;
+}
+
+.rise-builder-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rise-builder-section {
+  padding: 1rem 1.25rem;
+  background: var(--mint-light);
+  border: 1px solid var(--mint-border);
+  border-radius: var(--radius-md);
+}
+
+.rise-builder-select {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border: 1.5px solid var(--slate-300);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: var(--slate-800);
+  background-color: #FFFFFF;
+  transition: border-color var(--transition-fast);
+}
+
+.rise-builder-select:focus {
+  border-color: var(--mint-dark);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+}
+
+/* Module 4: Capstone Studio & BARS Form */
+.rise-capstone-studio {
+  margin-top: 1.5rem;
+}
+
+.rise-card {
+  background: #FFFFFF;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+.rise-input {
+  font-family: inherit;
+  border: 1.5px solid var(--slate-300);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.92rem;
+  color: var(--slate-800);
+  background-color: #FFFFFF;
+  transition: border-color var(--transition-fast);
+}
+
+.rise-input:focus {
+  border-color: var(--mint-dark);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+}
+
+.rise-rubric-passed {
+  background: #ECFDF5;
+  border: 2px solid var(--golden-green, #047857);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  animation: slideUp 0.3s ease-out;
+}
+
+.rise-rubric-failed {
+  background: #FEF2F2;
+  border: 2px solid var(--alert-red, #DC2626);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  animation: slideUp 0.3s ease-out;
+}
+
+.rise-rubric-checklist {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .rise-body-layout {
+    flex-direction: column;
+  }
+
+  .rise-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--slate-200);
+    padding: 1.25rem;
+  }
+
+  .rise-main-content,
+  .rise-main-container {
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .rise-top-bar {
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .rise-brand-title {
+    display: none;
+  }
+
+  .rise-progress-widget {
+    min-width: 140px;
+  }
+
+  .rise-module-title {
+    font-size: 1.5rem;
+  }
+
+  .rise-module-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .rise-module-footer .rise-btn {
+    width: 100%;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Language Toggle (ES/EN)
+   ========================================================================== */
+.rise-lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--slate-100, #F1F5F9);
+  border: 1px solid var(--slate-300, #CBD5E1);
+  border-radius: var(--radius-full, 9999px);
+  padding: 2px;
+  gap: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.rise-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.1rem;
+  height: 1.7rem;
+  padding: 0 0.55rem;
+  border: none;
+  background: transparent;
+  color: var(--slate-600, #475569);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-full, 9999px);
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.rise-lang-btn:hover:not(.is-active) {
+  color: var(--mint-dark, #0F766E);
+  background-color: rgba(15, 118, 110, 0.08);
+}
+
+.rise-lang-btn.is-active {
+  background: linear-gradient(135deg, var(--mint-dark, #0F766E), var(--mint-darker, #115E59));
+  color: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(15, 118, 110, 0.35);
+}
+
+.rise-lang-btn:focus-visible {
+  outline: 2px solid var(--mint-primary, #0D9488);
+  outline-offset: 1px;
+}
+
+/* ==========================================================================
+   Floating Methodological Foundations Button (Bottom-Right)
+   ========================================================================== */
+.rise-floating-theory-btn {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 95;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #0F766E 0%, #115E59 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-full, 9999px);
+  padding: 0.8rem 1.35rem;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(15, 118, 110, 0.35), 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rise-floating-theory-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
+  box-shadow: 0 12px 28px rgba(15, 118, 110, 0.45), 0 4px 10px rgba(0, 0, 0, 0.15);
+  color: #FFFFFF;
+}
+
+.rise-floating-theory-btn:active {
+  transform: translateY(-1px) scale(0.99);
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
+}
+
+.rise-floating-theory-btn:focus-visible {
+  outline: 3px solid #14B8A6;
+  outline-offset: 3px;
+}
+
+.rise-floating-theory-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  display: inline-block;
+}
+
+.rise-floating-theory-label {
+  line-height: 1.2;
+}
+
+@media (max-width: 640px) {
+  .rise-floating-theory-btn {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    padding: 0.7rem 1.1rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   9. Componentes Semánticos de Figuras, Diagramas y Activos Visuales
+   ========================================================================== */
+
+.rise-figure {
+  margin: 1.5rem 0;
+  background: var(--surface-card, #FFFFFF);
+  border: 1px solid var(--border-subtle, #E2E8F0);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rise-figure:hover {
+  border-color: var(--mint-secondary, #14B8A6);
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.08);
+}
+
+.rise-figure-media {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FAFCFC;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.rise-figure-img {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  max-height: 380px;
+  display: block;
+  object-fit: contain;
+}
+
+.rise-figure-caption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--slate-600, #475569);
+  background: var(--slate-50, #F8FAFC);
+  border-top: 1px solid var(--border-subtle, #E2E8F0);
+}
+
+.rise-figure-caption-icon {
+  color: var(--mint-primary, #0F766E);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.rise-diagram-container {
+  margin: 1.25rem 0;
+  width: 100%;
+}
+
+.rise-scenario-visual {
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle, #E2E8F0);
+  background: #F8FAFC;
+}
+
+.rise-scenario-visual img,
+.rise-scenario-visual svg {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  display: block;
+  object-fit: contain;
+}
+

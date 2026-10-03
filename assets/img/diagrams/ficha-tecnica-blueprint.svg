@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" role="img" aria-label="Blueprint de la Ficha Técnica de Competencia">
+  <title>Anatomía de la Ficha Técnica Corporativa • Capstone Studio</title>
+  <desc>Esquema visual del artefacto final de consultoría que integra definición, graduación BARS y preguntas STAR.</desc>
+  <defs>
+    <filter id="bluepShadow" x="-3%" y="-5%" width="106%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="340" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="1.2">ARTEFACTO DE CONSULTORÍA • ENTREGABLE FINAL MÓDULO 5</text>
+  <text x="400" y="52" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="800" fill="#0F172A">Anatomía Estructural de la Ficha Técnica Calibrada</text>
+
+  <!-- Document Sheet Graphic -->
+  <g transform="translate(40, 70)" filter="url(#bluepShadow)">
+    <rect width="720" height="245" rx="8" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+
+    <!-- Document Header -->
+    <rect x="0" y="0" width="720" height="36" rx="8" fill="#0F766E"/>
+    <text x="20" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="800" fill="#FFFFFF">FICHA TÉCNICA DE COMPETENCIA LABORAL • ESTÁNDAR ALLES</text>
+    <rect x="580" y="6" width="125" height="24" rx="4" fill="#14B8A6"/>
+    <text x="642" y="22" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="800" fill="#FFFFFF">EXPORTABLE DOCX</text>
+
+    <!-- Block 1: Definición -->
+    <g transform="translate(20, 50)">
+      <rect width="680" height="48" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+      <rect x="0" y="0" width="160" height="48" rx="6" fill="#F0FDFA"/>
+      <text x="80" y="22" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#0F766E">1. DEFINICIÓN</text>
+      <text x="80" y="36" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#0D9488">Fórmula 4 Partes</text>
+      <text x="180" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#1E293B">Verbo Infinitivo + Objeto Directo + Contexto Operativo + Propósito Estratégico</text>
+      <text x="180" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#64748B">Redacción objetiva, libre de adjetivos morales ("buena persona") o intenciones abstractas.</text>
+    </g>
+
+    <!-- Block 2: BARS -->
+    <g transform="translate(20, 108)">
+      <rect width="680" height="52" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+      <rect x="0" y="0" width="160" height="52" rx="6" fill="#F0FDFA"/>
+      <text x="80" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#0F766E">2. GRADUACIÓN</text>
+      <text x="80" y="38" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#0D9488">BARS A-B-C-D</text>
+      
+      <rect x="180" y="10" width="115" height="32" rx="4" fill="#F1F5F9"/>
+      <text x="237" y="30" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#334155">A: Sistémico</text>
+
+      <rect x="305" y="10" width="115" height="32" rx="4" fill="#F1F5F9"/>
+      <text x="362" y="30" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#334155">B: Táctico</text>
+
+      <rect x="430" y="10" width="115" height="32" rx="4" fill="#CCFBF1"/>
+      <text x="487" y="30" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="800" fill="#0F766E">C: Estándar (Req)</text>
+
+      <rect x="555" y="10" width="115" height="32" rx="4" fill="#F1F5F9"/>
+      <text x="612" y="30" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#334155">D: Inicial</text>
+    </g>
+
+    <!-- Block 3: BBI Questions -->
+    <g transform="translate(20, 170)">
+      <rect width="680" height="60" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+      <rect x="0" y="0" width="160" height="60" rx="6" fill="#F0FDFA"/>
+      <text x="80" y="28" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#0F766E">3. PROTOCOLO BBI</text>
+      <text x="80" y="44" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#0D9488">Preguntas STAR</text>
+      
+      <text x="180" y="24" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#1E293B">Batería de Preguntas Pasadas Reales (Hechos de los últimos 12 a 18 meses)</text>
+      <text x="180" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#475569">• P1: Situación de alta fricción • P2: Evidencia métrica de impacto • P3: Pregunta de sondeo personal</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metodología Martha Alles: Creación y Calibración de Competencias Laborales</title>
+  
+  <!-- SEO & Metadatos Pedagógicos -->
+  <meta name="description" content="Curso interactivo SCORM 1.2 / 2004 basado en la Trilogía Martha Alles para el diseño, graduación conductual y calibración de competencias laborales.">
+  <meta name="author" content="Equipo de Talento & Metodología Alles">
+
+  <!-- Hojas de Estilo Mint Design System & Rise Blocks -->
+  <link rel="stylesheet" href="css/mint-theme.css">
+  <link rel="stylesheet" href="css/rise-blocks.css">
+</head>
+<body class="mint-theme">
+  <!-- Contenedor Principal de la SPA -->
+  <div id="app" role="application" aria-label="Curso Interactivo de Metodología Martha Alles">
+    <!-- El router montará aquí la interfaz dinámica -->
+    <div style="display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; color: #0F766E;">
+      <p>Cargando Entorno de Aprendizaje Interactivo...</p>
+    </div>
+  </div>
+
+  <!-- Inicialización del Core Engine y SPA Router -->
+  <script type="module">
+    import { ScormAdapter } from './js/core/scorm-adapter.js?v=20261001d';
+    import { CourseStore } from './js/core/store.js?v=20261001d';
+    import { CourseRouter } from './js/ui/router.js?v=20261001d';
+
+    // 1. Inicializa el Adaptador SCORM (con fallback automático a localStorage)
+    const scormAdapter = new ScormAdapter();
+    scormAdapter.init();
+
+    // 2. Inicializa el CourseStore reactivo sincronizado con el LMS
+    const store = new CourseStore(scormAdapter);
+
+    // 3. Monta el SPA Router
+    const router = new CourseRouter({
+      store,
+      adapter: scormAdapter,
+      rootContainer: '#app'
+    });
+
+    // 4. Asegura la persistencia y cierre limpio con exit='suspend' ante descarga de la ventana (idempotente)
+    let unloadHandled = false;
+    const handleUnload = () => {
+      if (unloadHandled) return;
+      unloadHandled = true;
+      try {
+        scormAdapter.setExit('suspend');
+        scormAdapter.finish();
+      } catch (e) {
+        // En navegadores estrictos no interrumpe el cierre
+      }
+    };
+    window.addEventListener('beforeunload', handleUnload);
+    window.addEventListener('pagehide', handleUnload);
+
+    // Exposición global para depuración en consola de LMS
+    window.CourseApp = {
+      adapter: scormAdapter,
+      store,
+      router
+    };
+  </script>
+</body>
+</html>

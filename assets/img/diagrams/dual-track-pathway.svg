@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" role="img" aria-label="Metodología Andragógica Dual-Track">
+  <title>Arquitectura Pedagógica Dual-Track</title>
+  <desc>Diagrama que contrasta la ruta práctica de reto invertido con la espina teórica on-demand sin bloqueo cognitivo.</desc>
+  <defs>
+    <linearGradient id="bgGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <filter id="cardShadow2" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="320" rx="12" fill="url(#bgGrad2)" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <text x="400" y="34" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="1.2">ARQUITECTURA ANDRAGÓGICA • KATHY MOORE &amp; MARTHA ALLES</text>
+  <text x="400" y="56" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="17" font-weight="800" fill="#0F172A">Ruta Dual-Track: Práctica Invertida y Fundamento On-Demand</text>
+
+  <!-- Track 1: Práctica (Action Mapping) -->
+  <g transform="translate(40, 80)" filter="url(#cardShadow2)">
+    <rect width="720" height="96" rx="8" fill="#FFFFFF" stroke="#0F766E" stroke-width="2"/>
+    <rect x="0" y="0" width="140" height="96" rx="8" fill="#0F766E"/>
+    <text x="70" y="42" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">TRACK 1</text>
+    <text x="70" y="60" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#CCFBF1">Práctica Central</text>
+
+    <!-- Step 1 -->
+    <g transform="translate(155, 16)">
+      <rect width="125" height="64" rx="6" fill="#F0FDFA" stroke="#99F6E4" stroke-width="1"/>
+      <text x="62" y="26" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F766E">1. Dilema Real</text>
+      <text x="62" y="44" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#475569">Caso de crisis</text>
+    </g>
+    <text x="290" y="52" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#0F766E">→</text>
+
+    <!-- Step 2 -->
+    <g transform="translate(305, 16)">
+      <rect width="125" height="64" rx="6" fill="#FEF3C7" stroke="#FDE68A" stroke-width="1"/>
+      <text x="62" y="26" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#B45309">2. Fallo Productivo</text>
+      <text x="62" y="44" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#92400E">Quiebre cognitivo</text>
+    </g>
+    <text x="440" y="52" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#0F766E">→</text>
+
+    <!-- Step 3 -->
+    <g transform="translate(455, 16)">
+      <rect width="125" height="64" rx="6" fill="#F0FDFA" stroke="#99F6E4" stroke-width="1"/>
+      <text x="62" y="26" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F766E">3. Píldora JIT</text>
+      <text x="62" y="44" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#475569">Feedback táctico</text>
+    </g>
+    <text x="590" y="52" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#0F766E">→</text>
+
+    <!-- Step 4 -->
+    <g transform="translate(605, 16)">
+      <rect width="100" height="64" rx="6" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+      <text x="50" y="26" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#065F46">4. Avance</text>
+      <text x="50" y="44" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#047857">Desbloqueo</text>
+    </g>
+  </g>
+
+  <!-- Track 2: Teoría On-Demand -->
+  <g transform="translate(40, 195)" filter="url(#cardShadow2)">
+    <rect width="720" height="96" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <rect x="0" y="0" width="140" height="96" rx="8" fill="#334155"/>
+    <text x="70" y="42" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">TRACK 2</text>
+    <text x="70" y="60" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#94A3B8">Espina Teórica</text>
+
+    <!-- Theory Info -->
+    <g transform="translate(155, 16)">
+      <text x="0" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1E293B">Acceso Lateral On-Demand (Bajo Demanda)</text>
+      <text x="0" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#475569">Artículos científicos originales (McClelland, Spencer, Elliott Jaques, Martha Alles).</text>
+      <text x="0" y="56" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#0F766E">✓ Sin fricción: No bloquea el avance del curso ni penaliza la certificación obligatoria.</text>
+    </g>
+
+    <!-- Badge Visual -->
+    <g transform="translate(605, 16)">
+      <rect width="100" height="64" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="50" y="28" text-anchor="middle" font-size="16">🏅</text>
+      <text x="50" y="48" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#475569">Insignia Opcional</text>
+    </g>
+  </g>
+</svg>

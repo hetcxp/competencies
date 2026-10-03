@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 260" role="img" aria-label="Novatech S.A. Case and Rating Inflation">
+  <title>Novatech S.A. Case • The 94% Illusion</title>
+  <desc>Infographic of the Novatech dilemma: 94% outstanding in evaluations versus collapsed real-world projects.</desc>
+  <defs>
+    <linearGradient id="novatechBgEn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="alertGradEn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="760" height="260" rx="10" fill="url(#novatechBgEn)"/>
+
+  <!-- Left: Corporate Dossier / Crisis Badge -->
+  <g transform="translate(30, 25)">
+    <rect width="130" height="26" rx="4" fill="#334155"/>
+    <text x="65" y="17" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#94A3B8" letter-spacing="1">AUDIT CASE</text>
+    <text x="0" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">Novatech S.A.</text>
+    <text x="0" y="74" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#94A3B8">The Copied Dictionary Syndrome</text>
+
+    <rect x="0" y="95" width="220" height="120" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+    <text x="12" y="118" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#F87171">ORGANIZATIONAL PARADOX:</text>
+    <text x="12" y="138" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#CBD5E1">• Evaluation: 94% "Outstanding"</text>
+    <text x="12" y="156" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#CBD5E1">• Reality: 4 cancelled projects</text>
+    <text x="12" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#CBD5E1">• Cause: Downloaded web catalog</text>
+    <text x="12" y="196" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#38BDF8">Zero observable behaviors</text>
+  </g>
+
+  <!-- Right: Data Visualization (Gauss Curve vs. Reality) -->
+  <g transform="translate(290, 25)">
+    <rect width="440" height="210" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+    <text x="220" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#94A3B8">PERFORMANCE RATING DISTRIBUTION</text>
+
+    <!-- Normal Distribution Baseline (Dashed) -->
+    <path d="M 40 170 Q 150 170 200 65 Q 250 170 380 170" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="200" y="55" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Expected Gaussian Distribution</text>
+
+    <!-- Distorted Reality in Novatech: Massive Spike at 94% (Red/Alert) -->
+    <path d="M 40 170 Q 260 170 310 160 Q 350 30 370 170" fill="rgba(239, 68, 68, 0.2)" stroke="#EF4444" stroke-width="3"/>
+    
+    <!-- Big 94% Badge -->
+    <g transform="translate(320, 20)">
+      <rect width="90" height="34" rx="6" fill="url(#alertGradEn)"/>
+      <text x="45" y="23" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="900" fill="#FFFFFF">94% OUT</text>
+    </g>
+
+    <!-- Axis and ticks -->
+    <line x1="30" y1="170" x2="410" y2="170" stroke="#64748B" stroke-width="1.5"/>
+    <text x="35" y="188" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94A3B8">Unsatisfactory</text>
+    <text x="140" y="188" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94A3B8">In Development</text>
+    <text x="250" y="188" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94A3B8">Standard</text>
+    <text x="350" y="188" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="700" fill="#F87171">Outstanding</text>
+  </g>
+</svg>

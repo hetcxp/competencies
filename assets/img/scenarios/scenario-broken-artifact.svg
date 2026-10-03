@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 260" role="img" aria-label="Auditoría del Artefacto Corporativo Roto">
+  <title>Auditoría del Artefacto Roto</title>
+  <desc>Ficha técnica corporativa defectuosa con marcas de auditoría sobre juicios morales y redacción ambigua.</desc>
+  <defs>
+    <filter id="docShadow" x="-3%" y="-5%" width="106%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <rect width="760" height="260" rx="10" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+
+  <!-- Left: Red-lined Document -->
+  <g transform="translate(30, 20)" filter="url(#docShadow)">
+    <rect width="420" height="220" rx="6" fill="#FFFFFF" stroke="#EF4444" stroke-width="2"/>
+    <rect x="0" y="0" width="420" height="30" rx="6" fill="#FEE2E2"/>
+    <text x="15" y="20" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#B91C1C">DOCUMENTO CORPORATIVO OBSOLETO • AUDITORÍA</text>
+
+    <text x="20" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Competencia: "Liderazgo y Lealtad a la Empresa"</text>
+    
+    <!-- Bad Definition Box -->
+    <rect x="20" y="65" width="380" height="52" rx="4" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+    <text x="30" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#7F1D1D">"Es ser una buena persona que ama a la organización, teniendo</text>
+    <text x="30" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#7F1D1D">una actitud positiva y colaborando con todos voluntariamente."</text>
+
+    <!-- Strike-throughs and callouts -->
+    <line x1="28" y1="81" x2="380" y2="81" stroke="#DC2626" stroke-width="2"/>
+    <line x1="28" y1="99" x2="360" y2="99" stroke="#DC2626" stroke-width="2"/>
+
+    <!-- Audit stamp -->
+    <g transform="translate(250, 130) rotate(-8)">
+      <rect width="140" height="42" rx="6" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="3 2"/>
+      <text x="70" y="26" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="900" fill="#DC2626">RECHAZADO</text>
+      <text x="70" y="38" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="8" font-weight="700" fill="#DC2626">SESGO AXIOLÓGICO</text>
+    </g>
+
+    <text x="20" y="145" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#991B1B">Diagnóstico del Consultor:</text>
+    <text x="20" y="162" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#475569">1. Contiene juicio moral ("buena persona").</text>
+    <text x="20" y="178" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#475569">2. Verbos abstractos no observables en el puesto.</text>
+    <text x="20" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#475569">3. Desanclado del impacto y estrategia del negocio.</text>
+  </g>
+
+  <!-- Right: Technical Criteria Callout -->
+  <g transform="translate(470, 20)">
+    <rect width="260" height="220" rx="8" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.5"/>
+    <rect x="0" y="0" width="260" height="34" rx="8" fill="#0F766E"/>
+    <text x="130" y="22" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">CORRECCIÓN EXIGIDA (ALLES)</text>
+
+    <g transform="translate(15, 48)">
+      <text x="0" y="16" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0F766E">ESTÁNDAR RIGUROSO:</text>
+      <text x="0" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#334155">• Redactar con fórmula de 4 bloques.</text>
+      <text x="0" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#334155">• Suprimir valoraciones subjetivas.</text>
+      <text x="0" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#334155">• Conducta verificable por terceros.</text>
+    </g>
+
+    <g transform="translate(15, 140)">
+      <rect width="230" height="60" rx="4" fill="#F0FDFA" stroke="#99F6E4" stroke-width="1"/>
+      <text x="12" y="20" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#0F766E">RETO A RESOLVER:</text>
+      <text x="12" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#115E59">Aislar la formulación correcta</text>
+      <text x="12" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#115E59">y erradicar los vicios corporativos.</text>
+    </g>
+  </g>
+</svg>

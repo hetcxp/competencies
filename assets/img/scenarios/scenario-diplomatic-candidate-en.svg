@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 260" role="img" aria-label="Interview with the Diplomatic Candidate">
+  <title>The Diplomatic Candidate Challenge • STAR Interview</title>
+  <desc>Technical selection interview scene where an applicant provides rehearsed, hypothetical responses.</desc>
+  <defs>
+    <filter id="candShadowEn" x="-3%" y="-5%" width="106%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="760" height="260" rx="10" fill="#0F172A"/>
+
+  <!-- Header -->
+  <text x="380" y="28" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#2DD4BF" letter-spacing="1">BEHAVIORAL EVENT INTERVIEW (BBI) • AUDIT</text>
+  <text x="380" y="48" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="800" fill="#FFFFFF">The Rehearsed Candidate Syndrome</text>
+
+  <!-- Left: Candidate Rehearsed Speech -->
+  <g transform="translate(30, 65)" filter="url(#candShadowEn)">
+    <rect width="330" height="170" rx="8" fill="#1E293B" stroke="#475569" stroke-width="1.5"/>
+    <rect x="0" y="0" width="330" height="32" rx="8" fill="#334155"/>
+    <text x="16" y="21" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#F8FAFC">APPLICANT • HYPOTHETICAL DISCOURSE</text>
+
+    <text x="16" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#38BDF8">"I always strive for consensus..."</text>
+    <rect x="16" y="65" width="298" height="54" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+    <text x="24" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-style="italic" fill="#94A3B8">"In tense situations, the ideal approach is to</text>
+    <text x="24" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-style="italic" fill="#94A3B8">engage with empathy and motivate people."</text>
+
+    <rect x="16" y="128" width="298" height="26" rx="4" fill="rgba(239, 68, 68, 0.2)" stroke="#EF4444" stroke-width="1"/>
+    <text x="165" y="145" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#F87171">Zero Predictive Validity: r = 0.10 (Hypothetical)</text>
+  </g>
+
+  <!-- Arrow -->
+  <text x="380" y="155" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#14B8A6">→</text>
+
+  <!-- Right: Interviewer Technique -->
+  <g transform="translate(400, 65)" filter="url(#candShadowEn)">
+    <rect width="330" height="170" rx="8" fill="#1E293B" stroke="#0F766E" stroke-width="1.5"/>
+    <rect x="0" y="0" width="330" height="32" rx="8" fill="#0F766E"/>
+    <text x="16" y="21" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">INTERVIEWER • ALLES TECHNIQUE</text>
+
+    <text x="16" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#2DD4BF">Concrete Past Probing (BBI / STAR)</text>
+    <rect x="16" y="65" width="298" height="54" rx="4" fill="#0F172A" stroke="#0F766E" stroke-width="1"/>
+    <text x="24" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#F0FDFA">"Describe a specific situation in the last 18 months</text>
+    <text x="24" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#F0FDFA">where a direct report refused to follow your instruction."</text>
+
+    <rect x="16" y="128" width="298" height="26" rx="4" fill="rgba(16, 185, 129, 0.2)" stroke="#10B981" stroke-width="1"/>
+    <text x="165" y="145" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#34D399">Superior Predictive Validity: r = 0.51 - 0.65</text>
+  </g>
+</svg>

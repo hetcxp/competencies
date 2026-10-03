@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" role="img" aria-label="Matriz de Competencias Cardinales y Específicas">
+  <title>Arquitectura de Competencias • Cardinales vs. Específicas</title>
+  <desc>Diagrama que ilustra la distribución de competencias transversales a toda la organización frente a las competencias específicas por área y la Ley de Parsimonia.</desc>
+  <defs>
+    <filter id="matrixShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="320" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <text x="400" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="1.2">ARQUITECTURA ORGANIZACIONAL • LEY DE PARSIMONIA</text>
+  <text x="400" y="56" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="17" font-weight="800" fill="#0F172A">Competencias Cardinales vs. Específicas</text>
+
+  <!-- Left: Cardinales (Horizontal / Transversal) -->
+  <g transform="translate(40, 80)" filter="url(#matrixShadow)">
+    <rect width="340" height="210" rx="8" fill="#F0FDFA" stroke="#0F766E" stroke-width="2"/>
+    <rect x="0" y="0" width="340" height="36" rx="8" fill="#0F766E"/>
+    <text x="170" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">COMPETENCIAS CARDINALES</text>
+
+    <text x="20" y="62" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#0F766E">Alcance: 100% de los Colaboradores</text>
+    <text x="20" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Aplican desde la Dirección General hasta la base.</text>
+    <text x="20" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Reflejan la misión, visión y ADN de la empresa.</text>
+    <text x="20" y="118" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Ejemplos: Ética, Compromiso, Calidad.</text>
+
+    <!-- Parsimony rule -->
+    <rect x="20" y="140" width="300" height="50" rx="6" fill="#FFFFFF" stroke="#99F6E4" stroke-width="1"/>
+    <text x="170" y="160" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#0F766E">LEY DE PARSIMONIA ALLES:</text>
+    <text x="170" y="178" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#0D9488">Máximo 3 a 5 competencias cardinales</text>
+  </g>
+
+  <!-- Right: Específicas (Vertical / Segregadas) -->
+  <g transform="translate(420, 80)" filter="url(#matrixShadow)">
+    <rect width="340" height="210" rx="8" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+    <rect x="0" y="0" width="340" height="36" rx="8" fill="#334155"/>
+    <text x="170" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">COMPETENCIAS ESPECÍFICAS</text>
+
+    <text x="20" y="62" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#1E293B">Alcance: Por Familia o Nivel Jerárquico</text>
+    <text x="20" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Específicas Gerenciales (Liderazgo, Negociación).</text>
+    <text x="20" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Específicas Técnicas por Área (Finanzas, IT, Ventas).</text>
+    <text x="20" y="118" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" fill="#334155">• Graduadas con diferente profundidad según rol.</text>
+
+    <rect x="20" y="140" width="300" height="50" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="170" y="160" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#334155">LÍMITE COGNITIVO POR PUESTO:</text>
+    <text x="170" y="178" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#64748B">No superar 7 u 8 competencias en total</text>
+  </g>
+</svg>

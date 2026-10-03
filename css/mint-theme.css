@@ -1,0 +1,146 @@
+/**
+ * Mint Theme - Design Tokens & Foundations
+ * Metodología Martha Alles - Paquete SCORM Rise Mint Edition
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Brand Mint Palette (WCAG AA Compliant >= 4.5:1) */
+  --mint-primary: #0F766E;
+  --mint-primary-hover: #115E59;
+  --mint-dark: #0F766E;
+  --mint-darker: #115E59;
+  --mint-light: #F0FDFA;
+  --mint-subtle: #CCFBF1;
+  --mint-border: #99F6E4;
+
+  /* Surfaces & Backgrounds */
+  --surface-bg: #F8FAFC;
+  --surface-card: #FFFFFF;
+  --surface-card-hover: #FAFCFD;
+  --surface-elevated: #FFFFFF;
+  --surface-muted: #F1F5F9;
+
+  /* Neutral Slate Palette */
+  --slate-900: #0F172A;
+  --slate-800: #1E293B;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748B;
+  --slate-400: #64748B;
+  --slate-300: #CBD5E1;
+  --slate-200: #E2E8F0;
+  --slate-100: #F1F5F9;
+  --slate-text: #0F172A;
+  --slate-muted: #64748B;
+  --border-subtle: #E2E8F0;
+
+  /* Semantic Feedback & Statuses (WCAG AA Compliant >= 4.5:1) */
+  --alert-red: #DC2626;
+  --alert-red-dark: #B91C1C;
+  --alert-red-light: #FEF2F2;
+  --alert-red-border: #FECACA;
+
+  --golden-green: #047857;
+  --golden-green-dark: #065F46;
+  --golden-green-light: #ECFDF5;
+  --golden-green-border: #A7F3D0;
+
+  --amber-warning: #B45309;
+  --amber-warning-dark: #92400E;
+  --amber-warning-light: #FFFBEB;
+  --amber-warning-border: #FDE68A;
+
+  --info-blue: #0369A1;
+  --info-blue-light: #F0F9FF;
+  --info-blue-border: #BAE6FD;
+
+  /* Aliases for inline theory tables */
+  --success-border: #047857;
+  --success-bg: #ECFDF5;
+  --danger-border: #DC2626;
+  --danger-bg: #FEF2F2;
+
+  /* Level Color Codes (Taxonomía Alles) - WCAG AA Contrast >= 4.5:1 */
+  --level-a-color: #4338CA;
+  --level-a-bg: #EEF2FF;
+  --level-b-color: #0F766E;
+  --level-b-bg: #F0FDFA;
+  --level-c-color: #92400E;
+  --level-c-bg: #FFFBEB;
+  --level-d-color: #334155;
+  --level-d-bg: #F1F5F9;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Lora', Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: 'JetBrains Mono', Consolas, Monaco, monospace;
+
+  /* Spacings */
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 3rem;    /* 48px */
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 25px -5px rgba(13, 148, 136, 0.08), 0 8px 10px -6px rgba(13, 148, 136, 0.04);
+  --shadow-drawer: -10px 0 35px -5px rgba(15, 23, 42, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* CSS Reset & Foundations */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--surface-bg);
+  color: var(--slate-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--slate-300);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mint-dark);
+}
+
+/* Base Accessibility Focus Outline */
+:focus-visible {
+  outline: 2px solid var(--mint-primary);
+  outline-offset: 2px;
+}
